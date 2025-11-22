@@ -1,0 +1,61 @@
+obstacles:
+- name: box_4
+  type: box
+  color: gray
+  enabled: true
+  x_pose: -1.2
+  y_pose: 1.0
+  z_pose: 0.5
+  size: [0.1, 0.1, 1.0]
+  motion:
+    type: linear
+    velocity: 1.0
+    std: 0.1
+    path:
+    - [-1.1, 0.8]
+    - [-1.2, -0.1]
+- name: box_5
+  type: box
+  color: gray
+  enabled: true
+  x_pose: -0.9
+  y_pose: 0.4
+  z_pose: 0.5
+  size: [0.1, 0.1, 1.0]
+  motion:
+    type: linear
+    velocity: 1.0
+    std: 0.1
+    path:
+    - [-0.6, 0.2]
+    - [-0.6, -1.0]
+- name: box_6
+  type: box
+  color: gray
+  enabled: true
+  x_pose: -0.1
+  y_pose: 0.1
+  z_pose: 0.5
+  size: [0.1, 0.1, 1.0]
+  motion:
+    type: linear
+    velocity: 1.0
+    std: 0.1
+    path:
+    - [0.1, -0.0]
+    - [0.6, -1.1]
+- name: box_7
+  type: box
+  color: gray
+  enabled: true
+  x_pose: 0.7
+  y_pose: -0.6
+  z_pose: 0.5
+  size: [0.1, 0.1, 1.0]
+  motion:
+    type: linear
+    velocity: 1.0
+    std: 0.1
+    path:
+    - [0.9, -0.8]
+    - [2.7, -1.0]

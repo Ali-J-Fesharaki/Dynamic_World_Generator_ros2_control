@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+    <world name="maze">
+        <physics name="1ms" type="ignored">
+            <max_step_size>0.003</max_step_size>
+            <real_time_factor>1</real_time_factor>
+            <real_time_update_rate>1000</real_time_update_rate>
+        </physics>
+        <plugin name="ignition::gazebo::systems::Physics" filename="ignition-gazebo-physics-system" />
+        <plugin name="ignition::gazebo::systems::UserCommands" filename="ignition-gazebo-user-commands-system" />
+        <plugin name="ignition::gazebo::systems::SceneBroadcaster" filename="ignition-gazebo-scene-broadcaster-system" />
+        <plugin name="ignition::gazebo::systems::Contact" filename="ignition-gazebo-contact-system" />
+   <plugin name="ignition::gazebo::systems::Sensors" filename="ignition-gazebo-sensors-system">
+     <render_engine>ogre2</render_engine>
+   </plugin>
+
+        <light name="sun" type="directional">
+            <cast_shadows>1</cast_shadows>
+            <pose>0 0 10 0 -0 0</pose>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <attenuation>
+                <range>1000</range>
+                <constant>0.90000000000000002</constant>
+                <linear>0.01</linear>
+                <quadratic>0.001</quadratic>
+            </attenuation>
+            <direction>-0.5 0.1 -0.9</direction>
+            <spot>
+                <inner_angle>0</inner_angle>
+                <outer_angle>0</outer_angle>
+                <falloff>0</falloff>
+            </spot>
+        </light>
+        <gravity>0 0 -9.8</gravity>
+        <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+        <atmosphere type="adiabatic" />
+        <scene>
+            <ambient>0.4 0.4 0.4 1</ambient>
+            <background>0.7 0.7 0.7 1</background>
+            <shadows>1</shadows>
+        </scene>
+        <model name="ground_plane">
+            <static>1</static>
+            <link name="link">
+                <collision name="collision">
+                    <geometry>
+                        <plane>
+                            <normal>0 0 1</normal>
+                            <size>100 100</size>
+                        </plane>
+                    </geometry>
+                    <surface>
+                        <friction>
+                            <ode />
+                        </friction>
+                        <bounce />
+                        <contact />
+                    </surface>
+                </collision>
+                <visual name="visual">
+                    <geometry>
+                        <plane>
+                            <normal>0 0 1</normal>
+                            <size>100 100</size>
+                        </plane>
+                    </geometry>
+                    <material>
+                        <ambient>0.8 0.8 0.8 1</ambient>
+                        <diffuse>0.8 0.8 0.8 1</diffuse>
+                        <specular>0.8 0.8 0.8 1</specular>
+                    </material>
+                    <plugin name="__default__" filename="__default__" />
+                </visual>
+            </link>
+            <plugin name="__default__" filename="__default__" />
+            <pose>0 0 0 0 -0 0</pose>
+        </model>
+
+        <model name="box_5">
+            <static>false</static>
+            <type>box</type>
+            <pose>0.600000 -0.000000 0.100000 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry><box><size>0.200000 0.200000 0.200000</size></box></geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry><box><size>0.200000 0.200000 0.200000</size></box></geometry>
+                    <material>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                    </material>
+                </visual><inertial>
+                <mass>8.000000</mass>
+                <inertia>
+                    <ixx>0.053333</ixx><ixy>0</ixy><ixz>0</ixz>
+                    <iyy>0.053333</iyy><iyz>0</iyz>
+                    <izz>0.053333</izz>
+                </inertia>
+            </inertial><gravity>false</gravity></link><motion><type>linear</type><velocity>1.000000</velocity><std>0.100000</std><point><x>0.600000</x><y>-0.000000</y></point><point><x>0.700000</x><y>1.400000</y></point></motion></model><model name="box_6">
+            <static>false</static>
+            <type>box</type>
+            <pose>-1.000000 1.000000 0.100000 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry><box><size>0.200000 0.200000 0.200000</size></box></geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry><box><size>0.200000 0.200000 0.200000</size></box></geometry>
+                    <material>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                    </material>
+                </visual><inertial>
+                <mass>8.000000</mass>
+                <inertia>
+                    <ixx>0.053333</ixx><ixy>0</ixy><ixz>0</ixz>
+                    <iyy>0.053333</iyy><iyz>0</iyz>
+                    <izz>0.053333</izz>
+                </inertia>
+            </inertial><gravity>false</gravity></link><motion><type>linear</type><velocity>1.000000</velocity><std>0.100000</std><point><x>-0.900000</x><y>1.000000</y></point><point><x>-1.000000</x><y>2.300000</y></point></motion></model><model name="box_7">
+            <static>false</static>
+            <type>box</type>
+            <pose>-0.900000 -0.800000 0.100000 0 0 0</pose>
+            <link name="link">
+                <collision name="collision">
+                    <geometry><box><size>0.200000 0.200000 0.200000</size></box></geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry><box><size>0.200000 0.200000 0.200000</size></box></geometry>
+                    <material>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                    </material>
+                </visual><inertial>
+                <mass>8.000000</mass>
+                <inertia>
+                    <ixx>0.053333</ixx><ixy>0</ixy><ixz>0</ixz>
+                    <iyy>0.053333</iyy><iyz>0</iyz>
+                    <izz>0.053333</izz>
+                </inertia>
+            </inertial><gravity>false</gravity></link><motion><type>linear</type><velocity>1.000000</velocity><std>0.100000</std><point><x>-0.900000</x><y>-0.800000</y></point><point><x>-0.900000</x><y>0.500000</y></point></motion></model></world>
+</sdf>

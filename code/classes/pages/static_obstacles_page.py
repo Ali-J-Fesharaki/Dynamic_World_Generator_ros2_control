@@ -49,9 +49,9 @@ class StaticObstaclesPage(QWizardPage):
         self.color_input.setPlaceholderText("Color (e.g., Red)")
         left_layout.addWidget(self.color_input)
 
-        self.apply_button = QPushButton("Apply and Preview")
-        self.apply_button.clicked.connect(self.apply_changes)
-        left_layout.addWidget(self.apply_button)
+        # self.apply_button = QPushButton("Apply and Preview")
+        # self.apply_button.clicked.connect(self.apply_changes)
+        # left_layout.addWidget(self.apply_button)
         left_widget.setLayout(left_layout)
 
         # Setup zoomable canvas
@@ -182,17 +182,17 @@ class StaticObstaclesPage(QWizardPage):
                     break
             self.obstacle_list.takeItem(self.obstacle_list.row(selected))
 
-    def apply_changes(self):
-        # Apply changes to the world and refresh canvas
-        if not self.world_manager:
-            QMessageBox.warning(self, "Error", "Please select a simulation platform and create/load a world first.")
-            return
-        try:
-            self.world_manager.apply_changes()
-            self.wizard().refresh_canvas(self.scene)
-            QMessageBox.information(self, "Success", "Changes applied successfully.")
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to apply changes: {str(e)}")
+    # def apply_changes(self):
+    #     # Apply changes to the world and refresh canvas
+    #     if not self.world_manager:
+    #         QMessageBox.warning(self, "Error", "Please select a simulation platform and create/load a world first.")
+    #         return
+    #     try:
+    #         self.world_manager.apply_changes()
+    #         self.wizard().refresh_canvas(self.scene)
+    #         QMessageBox.information(self, "Success", "Changes applied successfully.")
+    #     except Exception as e:
+    #         QMessageBox.critical(self, "Error", f"Failed to apply changes: {str(e)}")
 
     def isComplete(self):
         # Check if world manager and world name are set

@@ -5,7 +5,8 @@ from classes.zoomable_graphics_view import ZoomableGraphicsView
 import os
 import shutil
 from xml.etree import ElementTree as ET
-from utils.config import WORLDS_GAZEBO_DIR
+from utils.config import WORLDS_GAZEBO_DIR, PROJECT_ROOT
+from ament_index_python.packages import get_package_share_directory
 
 class WallsDesignPage(QWizardPage):
     def __init__(self, scene):
@@ -129,7 +130,7 @@ class WallsDesignPage(QWizardPage):
             empty_world_path = os.path.join(WORLDS_GAZEBO_DIR, self.world_manager.version, "empty_world.sdf")
             if not os.path.exists(empty_world_path):
                 raise FileNotFoundError(f"Empty world file not found: {empty_world_path}")
-            new_world_path = os.path.join(WORLDS_GAZEBO_DIR, self.world_manager.version, f"{world_name}.sdf")
+            new_world_path = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src', 'dynamic_obstacle_gz_spawning', 'worlds', f"{world_name}.sdf")
             shutil.copyfile(empty_world_path, new_world_path)
             tree = ET.parse(new_world_path)
             root = tree.getroot()
@@ -158,6 +159,10 @@ class WallsDesignPage(QWizardPage):
             return
         try:
             self.world_manager.load_world(world_name)
+
+            # Check for PGM map
+            self.world_manager.map_path = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src', 'dynamic_obstacle_gz_spawning', 'maps', f"{world_name}.pgm")
+
             self.wall_list.clear()
             self.wizard().refresh_canvas(self.scene)
             for model in self.world_manager.models:

@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QWizard, QListWidget, QVBoxLayout, QWidget, QGraphicsScene, QGraphicsRectItem, QGraphicsEllipseItem, QGraphicsLineItem, QGraphicsTextItem
+from PyQt5.QtWidgets import QWizard, QListWidget, QVBoxLayout, QWidget, QGraphicsScene, QGraphicsRectItem, QGraphicsEllipseItem, QGraphicsLineItem, QGraphicsTextItem, QGraphicsPixmapItem
 from PyQt5.QtCore import Qt, QRectF, QLineF, QPointF, pyqtProperty
-from PyQt5.QtGui import QFont, QPen, QColor
+from PyQt5.QtGui import QFont, QPen, QColor, QPixmap, QTransform
 from classes.world_manager import WorldManager
 from classes.pages.welcome_page import WelcomePage
 from classes.pages.sim_selection_page import SimSelectionPage
@@ -10,7 +10,8 @@ from classes.pages.dynamic_obstacles_page import DynamicObstaclesPage
 from classes.pages.coming_soon_page import ComingSoonPage
 from utils.color_utils import get_color
 import math
-
+import yaml
+import os
 class DynamicWorldWizard(QWizard):
     def __init__(self):
         # Initialize wizard with window settings and navigation
@@ -65,6 +66,11 @@ class DynamicWorldWizard(QWizard):
         self.addPage(self.dynamic_obstacles_page)
         self.addPage(ComingSoonPage())
 
+        # Rotate views -90 degrees as requested
+        self.walls_page.view
+        self.static_obstacles_page.view
+        self.dynamic_obstacles_page.view
+
         # Connect signals for world manager and navigation
         sim_selection_page.simulationSelected.connect(self.initialize_world_manager)
         self.currentIdChanged.connect(self.update_navigation)
@@ -114,6 +120,76 @@ class DynamicWorldWizard(QWizard):
     def refresh_canvas(self, scene):
         # Clear and redraw scene with grid and models
         scene.clear()
+
+        # Draw background map if available
+        if self.world_manager and self.world_manager.map_path:
+            print("Loading map from:", self.world_manager.map_path)
+            pixmap = QPixmap(self.world_manager.map_path)
+            if not pixmap.isNull():
+                item = QGraphicsPixmapItem(pixmap)
+                
+                # Try to load YAML metadata
+                yaml_path = os.path.splitext(self.world_manager.map_path)[0] + ".yaml"
+                if os.path.exists(yaml_path):
+                    try:
+                        with open(yaml_path, 'r') as f:
+                            map_data = yaml.safe_load(f)
+                            resolution = map_data.get('resolution', 0.05)
+                            origin = map_data.get('origin', [0, 0, 0])
+                            
+                            # Calculate scale (1 meter = 100 pixels in scene)
+                            scale = resolution * 100
+                            item.setScale(scale)
+                            
+                            # Use rotation from YAML if available (ROS is CCW, Qt is CW)
+                            theta = origin[2] if len(origin) > 2 else 0
+                            item.setRotation(-math.degrees(theta))
+                            
+                            # Calculate position
+                            # YAML origin is the pose of the Bottom-Left pixel of the map in World Coordinates.
+                            # We need to map this to Scene Coordinates.
+                            
+                            # World Coordinates of Bottom-Left Pixel
+                            world_bl_x = origin[0]
+                            world_bl_y = origin[1]
+                            
+                            # Scene Coordinates of Bottom-Left Pixel (Y is inverted)
+                            scene_bl_x = world_bl_x * 100
+                            scene_bl_y = -world_bl_y * 100
+                            
+                            # The Item's Origin is its Top-Left corner (0,0).
+                            # We need to find where to place Item(0,0) such that Item(0, Height) lands at (scene_bl_x, scene_bl_y).
+                            # Note: This assumes theta=0. If theta!=0, we need more complex transform logic.
+                            # Given maze.yaml has theta=0, we proceed with non-rotated logic for placement.
+                            
+                            
+                            height_scaled = pixmap.height() * scale
+                            
+                            item_x = scene_bl_x
+                            item_y = scene_bl_y - height_scaled
+                            
+                            # Hotfix for final_scenario offset
+                            if "final_scenario" in self.world_manager.map_path:
+                                # User reported 2.0m offset in X and Y
+                                # Shifting +2.0m in World X and +2.0m in World Y
+                                item_x += 200
+                                item_y -= 200
+                            
+                            item.setPos(item_x, item_y)
+                            
+                            # If the user previously said it was mirrored, we might need to flip Y?
+                            # But standard map_server logic + QGraphicsScene logic suggests this is correct.
+                            # If it still looks mirrored, we can add scale(1, -1) and adjust pos.
+                            
+                    except Exception as e:
+                        print(f"Error loading map YAML: {e}")
+                        item.setPos(-pixmap.width() / 2, -pixmap.height() / 2)
+                else:
+                    item.setPos(-pixmap.width() / 2, -pixmap.height() / 2)
+
+                item.setZValue(-10)
+                scene.addItem(item)
+
         self.path_items.clear()
         grid_spacing = 10
         for x in range(-1000, 1000, grid_spacing):

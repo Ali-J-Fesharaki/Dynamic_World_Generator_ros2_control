@@ -2,7 +2,12 @@ from PyQt5.QtWidgets import QWizardPage, QHBoxLayout, QVBoxLayout, QComboBox, QL
 from PyQt5.QtCore import Qt, QEvent, QPointF, QLineF, QRectF
 from PyQt5.QtGui import QPen, QColor
 from classes.zoomable_graphics_view import ZoomableGraphicsView
+from utils.config import PROJECT_ROOT
 import math
+import yaml
+import os
+import subprocess
+from ament_index_python.packages import get_package_share_directory
 
 class DynamicObstaclesPage(QWizardPage):
     def __init__(self, scene):
@@ -30,6 +35,8 @@ class DynamicObstaclesPage(QWizardPage):
         self.finish_button.clicked.connect(self.finish_path)
         self.apply_button = QPushButton("Apply and Preview")
         self.apply_button.clicked.connect(self.apply_changes)
+        self.export_button = QPushButton("Export Obstacles YAML")
+        self.export_button.clicked.connect(self.export_yaml)
 
         # Setup main layout with left panel and canvas
         layout = QHBoxLayout()
@@ -44,6 +51,7 @@ class DynamicObstaclesPage(QWizardPage):
         left_layout.addWidget(self.start_button)
         left_layout.addWidget(self.finish_button)
         left_layout.addWidget(self.apply_button)
+        left_layout.addWidget(self.export_button)
         left_widget.setLayout(left_layout)
 
         # Setup zoomable canvas
@@ -262,12 +270,96 @@ class DynamicObstaclesPage(QWizardPage):
         if not self.world_manager:
             QMessageBox.warning(self, "Error", "Please select a simulation platform and create/load a world first.")
             return
+        
+        # Mark dynamic obstacles as external spawn so WorldManager doesn't add them to SDF
+        for model in self.world_manager.models:
+            if model["type"] in ["box", "cylinder", "sphere"] and model["type"] != "wall":
+                model["external_spawn"] = True
+
         try:
-            self.world_manager.apply_changes()
+            # Export YAML
+            config_path = os.path.join(get_package_share_directory('dynamic_obstacle_gz_spawning') ,"config", "obstacles.yaml")
+            self.export_yaml(config_path)
+
+            # Launch spawner
+            # launch_path = os.path.join(PROJECT_ROOT, "code", "dynamic_obstacle_gz_spawning", "launch", "multi_obstacle_world.launch.py")
+            
+            # We use ros2 launch to run the launch file
+            # Assuming the environment is set up correctly
+            setup_path = os.path.join(PROJECT_ROOT, 'code',"control_ws", "install", "setup.zsh")
+            cmd = f"source {setup_path} && ros2 launch dynamic_obstacle_gz_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
+            
+            # Run in a separate terminal
+            subprocess.Popen(['gnome-terminal', '--', 'zsh', '-c', f'{cmd}; exec zsh'])
+            
             self.wizard().refresh_canvas(self.scene)
-            QMessageBox.information(self, "Success", "Changes applied successfully.")
+            QMessageBox.information(self, "Success", f"Exported obstacles and launched spawner.\nYAML: {config_path}")
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to apply changes: {str(e)}")
+
+    def export_yaml(self, yaml_path=None):
+        # Handle boolean from clicked signal
+        if isinstance(yaml_path, bool):
+            yaml_path = None
+
+        # Export obstacles to YAML file
+        if not self.world_manager:
+            QMessageBox.warning(self, "Error", "No world loaded.")
+            return
+        
+        obstacles_data = []
+        for model in self.world_manager.models:
+            if model.get("status") == "removed":
+                continue
+            
+            if model["type"] == "wall":
+                continue
+            
+            if model["type"] not in ["box", "cylinder", "sphere"]:
+                continue
+
+            obs = {
+                "name": model["name"],
+                "type": model["type"],
+                "color": model["properties"].get("color", "gray").lower(),
+                "enabled": True,
+                "x_pose": float(model["properties"]["position"][0]),
+                "y_pose": float(model["properties"]["position"][1]),
+                "z_pose": float(model["properties"]["position"][2]),
+                "size": list(model["properties"]["size"])
+            }
+            
+            if "motion" in model["properties"]:
+                motion = model["properties"]["motion"]
+                obs["motion"] = {
+                    "type": motion["type"],
+                    "velocity": float(motion["velocity"]),
+                    "std": float(motion["std"])
+                }
+                if "path" in motion:
+                    obs["motion"]["path"] = [list(p) for p in motion["path"]]
+                if motion["type"] == "elliptical":
+                     obs["motion"]["semi_major"] = float(motion["semi_major"])
+                     obs["motion"]["semi_minor"] = float(motion["semi_minor"])
+                     obs["motion"]["angle"] = float(motion["angle"])
+            
+            obstacles_data.append(obs)
+            
+        data = {"obstacles": obstacles_data}
+        
+        if yaml_path is None:
+            if self.world_manager.world_path:
+                yaml_path = os.path.join(get_package_share_directory('dynamic_obstacle_gz_spawning'),'config' "obstacles.yaml")
+            else:
+                return
+
+        try:
+            os.makedirs(os.path.dirname(yaml_path), exist_ok=True)
+            with open(yaml_path, 'w') as f:
+                yaml.dump(data, f, default_flow_style=None, sort_keys=False)
+            # QMessageBox.information(self, "Success", f"Exported obstacles to {yaml_path}")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to export YAML: {str(e)}")
 
     def isComplete(self):
         # Check if world manager and world name are set

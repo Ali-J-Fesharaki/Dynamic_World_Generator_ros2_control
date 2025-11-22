@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="turtlebot3_world">
+   <scene>
+     <grid>false</grid>
+     <ambient>0.4 0.4 0.4 1</ambient>
+     <background>0.7 0.7 0.7 1</background>
+     <shadows>true</shadows>
+   </scene>
+   <plugin name='ignition::gazebo::systems::Physics' filename='ignition-gazebo-physics-system'/>
+   <plugin name='ignition::gazebo::systems::Sensors' filename='ignition-gazebo-sensors-system'>
+     <render_engine>ogre2</render_engine>
+   </plugin>
+   <plugin name='ignition::gazebo::systems::UserCommands' filename='ignition-gazebo-user-commands-system'/>
+   <plugin name='ignition::gazebo::systems::SceneBroadcaster' filename='ignition-gazebo-scene-broadcaster-system'/>
+   <gui fullscreen='false'>
+     <plugin name='3D View' filename='GzScene3D'>
+       <ignition-gui>
+         <title>3D View</title>
+         <property type='bool' key='showTitleBar'>false</property>
+         <property type='string' key='state'>docked</property>
+       </ignition-gui>
+       <engine>ogre2</engine>
+       <scene>scene</scene>
+       <ambient_light>1 1 1 </ambient_light>
+
+       <background_color>0.5 0.8 0.95</background_color>
+       <camera_follow>
+         <target>prius_hybrid</target>
+         <p_gain>0.5</p_gain>
+         <offset>100 100 100</offset>
+       </camera_follow>
+     </plugin>
+     <plugin name='World control' filename='WorldControl'>
+       <ignition-gui>
+         <title>World control</title>
+         <property type='bool' key='showTitleBar'>false</property>
+         <property type='bool' key='resizable'>false</property>
+         <property type='double' key='height'>72</property>
+         <property type='double' key='width'>121</property>
+         <property type='double' key='z'>1</property>
+         <property type='string' key='state'>floating</property>
+         <anchors target='3D View'>
+           <line own='left' target='left'/>
+           <line own='bottom' target='bottom'/>
+         </anchors>
+       </ignition-gui>
+       <play_pause>true</play_pause>
+       <step>true</step>
+       <start_paused>true</start_paused>
+     </plugin>
+     <plugin name='World stats' filename='WorldStats'>
+       <ignition-gui>
+         <title>World stats</title>
+         <property type='bool' key='showTitleBar'>false</property>
+         <property type='bool' key='resizable'>false</property>
+         <property type='double' key='height'>110</property>
+         <property type='double' key='width'>290</property>
+         <property type='double' key='z'>1</property>
+         <property type='string' key='state'>floating</property>
+         <anchors target='3D View'>
+           <line own='right' target='right'/>
+           <line own='bottom' target='bottom'/>
+         </anchors>
+       </ignition-gui>
+       <sim_time>true</sim_time>
+       <real_time>true</real_time>
+       <real_time_factor>true</real_time_factor>
+       <iterations>true</iterations>
+     </plugin>
+     <plugin name='Teleop' filename='Teleop'>
+       <ignition-gui>
+         <property type='string' key='state'>docked</property>
+       </ignition-gui>
+       <topic>/cmd_vel</topic>
+     </plugin>
+   </gui>
+   <gravity>0 0 -9.8</gravity>
+   <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+   <atmosphere type='adiabatic'/>
+   <physics type='ode'>
+     <max_step_size>0.001</max_step_size>
+     <real_time_factor>1</real_time_factor>
+     <real_time_update_rate>1000</real_time_update_rate>
+   </physics>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <scene>
+      <shadows>false</shadows>
+    </scene>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0 0 10 0 1.570796 0</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+
+
+    <model name="turtlebot3_world">
+      <static>1</static>
+      <include>
+        <uri>model://turtlebot3_world</uri>
+      </include>
+    </model>
+
+  </world>
+</sdf>
