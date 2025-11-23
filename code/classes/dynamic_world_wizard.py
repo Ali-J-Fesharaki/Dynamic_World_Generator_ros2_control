@@ -168,13 +168,6 @@ class DynamicWorldWizard(QWizard):
                             item_x = scene_bl_x
                             item_y = scene_bl_y - height_scaled
                             
-                            # Hotfix for final_scenario offset
-                            if "final_scenario" in self.world_manager.map_path:
-                                # User reported 2.0m offset in X and Y
-                                # Shifting +2.0m in World X and +2.0m in World Y
-                                item_x += 200
-                                item_y -= 200
-                            
                             item.setPos(item_x, item_y)
                             
                             # If the user previously said it was mirrored, we might need to flip Y?

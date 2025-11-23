@@ -438,7 +438,7 @@ def get_color(color_name: str) -> Tuple[float, float, float]:
 def calculate_inertia(
     obstacle_type: str,
     size: Tuple[float, ...],
-    density: float = 1000.0
+    density: float = 1.0
 ) -> Tuple[float, float, float, float]:
     """
     Calculate mass and inertia tensor for different obstacle types.
@@ -559,7 +559,7 @@ def generate_ros2_control_plugin(
     </gazebo>'''
 
 
-def generate_prismatic_joints(obstacle_name: str, base_z: float = 0.0) -> str:
+def generate_prismatic_joints(obstacle_name: str, base_z: float = 0.0,x_pose: float =0.0,y_pose: float=0.0,z_pose: float=0.0) -> str:
     """
     Generate three orthogonal unlimited-range prismatic joints for XYZ motion.
     
@@ -711,7 +711,7 @@ def generate_obstacle_xacro(
     
     # Add prismatic joints for dynamic obstacles BEFORE the main link
     if has_motion:
-        xacro += generate_prismatic_joints(name, base_z=0.0)
+        xacro += generate_prismatic_joints(name, base_z=0.0,x_pose=x_pose,y_pose=y_pose,z_pose=z_pose)
     
     # Main link definition - use consistent naming
     xacro += f'''
@@ -722,7 +722,6 @@ def generate_obstacle_xacro(
     
     # Add origin for the link (initial position)
     xacro += f'''
-      <origin xyz="{x_pose:.6f} {y_pose:.6f} {z_pose:.6f}" rpy="0 0 0"/>
       <collision name="collision">
         <geometry>
           {geometry_xml}
@@ -757,9 +756,9 @@ def generate_obstacle_xacro(
     if not has_motion:
         xacro += f'''
     <joint name="fixed_to_world" type="fixed">
-      <parent link="$(arg namespace)/world"/>
+      <parent link="world"/>
       <child link="$(arg namespace)/link"/>
-      <origin xyz="{x_pose:.6f} {y_pose:.6f} {z_pose:.6f}" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 '''
     

@@ -337,7 +337,7 @@ class DynamicObstaclesPage(QWizardPage):
                     "std": float(motion["std"])
                 }
                 if "path" in motion:
-                    obs["motion"]["path"] = [list(p) for p in motion["path"]]
+                    obs["motion"]["path"] = [[p[0]-float(model["properties"]["position"][0]), p[1]-float(model["properties"]["position"][1])] for p in motion["path"]]
                 if motion["type"] == "elliptical":
                      obs["motion"]["semi_major"] = float(motion["semi_major"])
                      obs["motion"]["semi_minor"] = float(motion["semi_minor"])

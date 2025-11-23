@@ -2,7 +2,12 @@
 standalone_code/
 
 # ignore __pycache_
-code/__pycache__/
-code/utils/__pycache__/
-code/classes/__pycache__/
-code/classes/pages/__pycache__/
+**/__pycache__/
+code/control_ws/install/**
+code/control_ws/build/**
+code/control_ws/logs/**
+code/control_ws/devel/**
+
+code/control_ws/log/**
+**/*.pyc
+**/*.vscode

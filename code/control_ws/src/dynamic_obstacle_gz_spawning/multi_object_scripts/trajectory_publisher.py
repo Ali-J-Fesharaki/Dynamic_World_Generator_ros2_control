@@ -69,6 +69,7 @@ class TrajectoryPublisher(Node):
             # there is a mismatch between Wall Time and Sim Time.
             self.msg.header.stamp.sec = 0
             self.msg.header.stamp.nanosec = 0
+            self.msg.header.frame_id = 'world'
             
             self.publisher_.publish(self.msg)
             self.get_logger().info(f"Published trajectory to {self.publisher_.topic_name}")

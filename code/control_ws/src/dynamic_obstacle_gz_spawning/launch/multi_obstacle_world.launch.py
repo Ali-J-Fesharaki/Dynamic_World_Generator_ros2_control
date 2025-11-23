@@ -106,7 +106,7 @@ def generate_launch_description():
     )
 
     # Generate trajectories
-    trajectory_output_dir = os.path.join(dynamic_obstacle_gz_spawning_dir, 'config', 'generated_trajectories')
+    trajectory_output_dir = os.path.join('/tmp')
     obstacle_loader.generate_trajectory_yaml(trajectory_output_dir)
 
     for obstacle in obstacles:
