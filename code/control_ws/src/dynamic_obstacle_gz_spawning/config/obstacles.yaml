@@ -3,29 +3,29 @@ obstacles:
   type: box
   color: red
   enabled: true
-  x_pose: -6.9
-  y_pose: 19.6
+  x_pose: 4.2
+  y_pose: 46.0
   z_pose: 0.5
-  size: [0.5, 0.5, 1.0]
+  size: [2.0, 2.0, 1.0]
   motion:
     type: linear
-    velocity: 0.5
+    velocity: 2.0
     std: 0.0
     path:
-    - [0.0, 0.0]
-    - [0.0, 1.2999999999999972]
+    - [0.20000000000000018, -0.3999999999999986]
+    - [13.2, -0.3999999999999986]
 - name: box_2
   type: box
   color: green
   enabled: true
-  x_pose: 11.0
-  y_pose: -14.9
+  x_pose: 4.2
+  y_pose: 3.1
   z_pose: 0.5
-  size: [0.5, 0.5, 1.0]
+  size: [2.0, 2.0, 1.0]
   motion:
     type: linear
-    velocity: 0.5
+    velocity: 2.0
     std: 0.0
     path:
-    - [0.0, 0.0]
-    - [-1.6999999999999993, 0.0]
+    - [0.2999999999999998, -0.10000000000000009]
+    - [0.0, 9.6]

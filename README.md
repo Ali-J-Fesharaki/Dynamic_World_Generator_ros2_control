@@ -1,82 +1,27 @@
-# Dynamic World Generator Wizard (V1)
+# Dynamic World Generator Wizard (V2)
 
 ![Dynamic World Generator Wizard Banner](https://github.com/user-attachments/assets/1b00aa22-24d7-40f1-8526-a3612bd7f503)
 
-**Dynamic World Generator Wizard** is a *PyQt5*-based graphical user interface (*GUI*) application designed to create and manage dynamic simulation worlds for *Gazebo* (*Harmonic* or *Fortress* versions). It allows users to build custom worlds with walls, static obstacles (boxes, cylinders, spheres), and dynamic obstacles with various motion paths (linear, elliptical, polygon). The tool generates *SDF* (*Simulation Description Format*) files for *Gazebo* and includes a motion script to animate dynamic obstacles. This app is ideal for robotics simulation, testing autonomous systems, or educational purposes in simulation environments.
+**Dynamic World Generator Wizard** is a *PyQt5*-based graphical user interface (*GUI*) application designed to create and manage dynamic simulation worlds for *Gazebo* (*Harmonic* or *Fortress* versions). It allows users to build custom worlds with walls, static obstacles (boxes, cylinders, spheres), and dynamic obstacles with various motion paths (linear, elliptical, polygon).
+
+**Major Update (V2):** The backend has been completely re-engineered to use **ROS 2 Control**. Unlike the previous version which only visualized moving objects, this version ensures **superior dynamic obstacle collision handling**. Obstacles are spawned and controlled via ROS 2, providing realistic physics interactions and collision responses, making it ideal for testing autonomous navigation and collision avoidance algorithms.
 
 The wizard guides users through a step-by-step process, ensuring an intuitive experience. It supports creating new worlds from empty templates, loading existing ones, and applying changes in real-time to *Gazebo*.
 
 🙏 A special thanks to **Professor Sousso KELOUWANI** for his excellent idea that inspired the creation of this application.
 
-## Key Features
-
-* **Simulation Selection**: Choose *Gazebo Harmonic* (recommended) or *Fortress*. *Isaac Sim* support is under development.
-* **Wall Design**: Draw walls on a canvas with customizable width, height, and color.
-* **Static Obstacles**: Add boxes, cylinders, or spheres with dimensions and colors.
-* **Dynamic Obstacles**: Assign motion paths (linear, elliptical, polygon) with velocity and randomness (*std*).
-* **Preview and Apply**: Real-time canvas preview and apply changes to *Gazebo* simulation.
-* **Coming Soon**: Teasers for future features like *Gazebo Ionic* and *Isaac Sim 4.5.0/5.0.0*.
-
-## Code Structure
-
-The codebase is organized in a modular structure for maintainability, with classes separated by functionality. Here's the directory layout:
-
-```
-Dynamic_World_Generator/
-├── code/
-│   ├── __init__.py
-│   ├── classes/
-│   │   ├── dynamic_world_wizard.py  # Main wizard class handling navigation and canvas
-│   │   ├── zoomable_graphics_view.py  # Custom graphics view for zooming and panning the canvas
-│   │   ├── world_manager.py  # Handles world creation, loading, model management, and SDF generation
-│   │   ├── pages/
-│   │   │   ├── welcome_page.py  # Welcome page with title and GIF
-│   │   │   ├── sim_selection_page.py  # Simulation platform selection page
-│   │   │   ├── walls_design_page.py  # Wall design page with canvas drawing
-│   │   │   ├── static_obstacles_page.py  # Static obstacles addition page
-│   │   │   ├── dynamic_obstacles_page.py  # Dynamic obstacles and motion paths page
-│   │   │   └── coming_soon_page.py  # Coming soon features page
-│   ├── utils/
-│   │   ├── config.py  # Directory constants for images and worlds
-│   │   └── color_utils.py  # Utility for color mapping
-│   └── dwg_wizard.py  # Entry point to run the application
-├── images/
-│   ├── intro/
-│   │   ├── harmonic.png
-│   │   ├── fortress.jpeg
-│   │   └── isaacsim_450_gray.png
-│   └── future/
-│       ├── ionic.png
-│       ├── isaacsim_450.png
-│       └── isaacsim_500.png
-├── worlds/
-│   └── gazebo/
-│       ├── harmonic/
-│       │   ├── move_code # Motion scripts to animate dynamic obstacles (separate .py file + bash launcher file)
-│       │   └── empty_world.sdf
-│       └── fortress/
-│           ├── move_code # Motion scripts to animate dynamic obstacles (separate .py file + bash launcher file)
-│           └── empty_world.sdf
-└── README.md
-```
-
-* **`code/classes/`**: Contains core classes, including the wizard and page-specific logic.
-* **`code/classes/pages/`**: Individual wizard pages for modular *UI* components.
-* **`code/utils/`**: Shared utilities like path constants and color functions.
-* **`code/dwg_wizard.py`**: The main script to launch the wizard.
-* **`images/`**: Stores images for *UI* (intro and future features).
-* **`worlds/`**: Stores *Gazebo* world files and generated motion scripts.
-
 ## Installation and Usage
 
 ### Prerequisites
 
-* **Python**: *3.10+* (tested on *3.10*).
+* **OS**: Ubuntu 22.04 (Humble) or 24.04 (Jazzy).
+* **ROS 2**: Installed and configured (Humble or Jazzy).
+* **Python**: *3.10+*.
 * **Dependencies**: Install required libraries:
   ```bash
-  pip install PyQt5 lxml
+  pip install PyQt5 lxml psutil
   ```
-* **Gazebo**: Install *Gazebo Harmonic* (recommended) or *Fortress*:
+* **Gazebo**: Install *Gazebo Harmonic* (recommended) or *Fortress*.
   * For *Harmonic* (*Ubuntu*/*Debian*), please visit:
     [https://gazebosim.org/docs/harmonic/install_ubuntu/](https://gazebosim.org/docs/harmonic/install_ubuntu/)
 
@@ -87,20 +32,31 @@ Dynamic_World_Generator/
     ```bash
     pip install gz-transport13 gz-msgs10
     ```
+* **ROS 2 Packages**: Ensure `ros2_control`, `ros2_controllers`, and `gazebo_ros_pkgs` are installed.
+  ```bash
+  sudo apt install ros-<distro>-ros2-control ros-<distro>-ros2-controllers ros-<distro>-gazebo-ros-pkgs
+  ```
 * **Images and Worlds**: Ensure the `images/intro/`, `images/future/`, and `worlds/gazebo/{version}/empty_world.sdf` directories exist in the project root.
 
 ### Setup
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/ali-pahlevani/Dynamic_World_Generator.git
-   cd Dynamic_World_Generator
+   git clone https://github.com/Ali-J-Fesharaki/Dynamic_World_Generator_ros2_control.git
+   cd Dynamic_World_Generator_ros2_control
    ```
 
-2. **Run the Application**:
+2. **Build the ROS 2 Workspace**:
+   ```bash
+   cd code/control_ws
+   colcon build
+   source install/setup.bash
+   ```
+
+3. **Run the Application**:
    Run the main file from the `code/` directory:
    ```bash
-   cd code
+   cd ../
    python3 dwg_wizard.py
    ```
 
@@ -112,9 +68,9 @@ Dynamic_World_Generator/
   gz sim --version  # For Harmonic
   ign gazebo --version  # For Fortress
   ```
+* **ROS 2 Issues**: Ensure you have sourced your ROS 2 installation (`source /opt/ros/<distro>/setup.bash`) and the local workspace (`source code/control_ws/install/setup.bash`).
 * **Missing SDF Files**: Ensure `empty_world.sdf` exists in `worlds/gazebo/{version}/`.
 * **Path Issues**: If images or worlds are not found, verify paths in `code/utils/config.py`. Update `PROJECT_ROOT` if the project is moved.
-* **Transport Errors (Harmonic)**: Ensure `gz-transport13` and `gz-msgs10` are installed for dynamic obstacle motion scripts.
 
 ## Tutorial: Creating a Complete Dynamic World
 
@@ -128,7 +84,7 @@ The wizard guides you through a step-by-step process to build a dynamic world. B
 
 * **Choose Simulation**:
   * **Gazebo Harmonic (Recommended)**: Select for the latest features. Recommended for the best outcome and results.
-  * **Gazebo Fortress**: Not suitable for dynamic motions (since uses *subprocess* instead of *python bindings*). You could use it mainly for building a static world.
+  * **Gazebo Fortress**: Supported, but Harmonic is preferred for better integration.
   * **Isaac Sim**: Under development, currently disabled.
   * Click *Next* when done.
 
@@ -184,7 +140,10 @@ The wizard guides you through a step-by-step process to build a dynamic world. B
     * Elliptical: *1* click (defines orientation).
     * Polygon: Multiple clicks, then *Finish Path* to close.
   * Path appears on the canvas for preview.
-* **Apply Changes**: Click *Apply and Preview* to update the *SDF* and generate a motion script (`worlds/gazebo/{version}/move_code/myWorld_moveObstacles.py`) that animates obstacles in *Gazebo*.
+* **Apply Changes**: Click *Apply and Preview*. This will:
+  1.  Export the obstacle configuration to `obstacles.yaml`.
+  2.  Launch the ROS 2 `multi_obstacle_world.launch.py` file in a new terminal.
+  3.  Spawn the obstacles in Gazebo with `ros2_control` enabled.
 * **Canvas Controls**: Zoom/pan as before.
 * Click *Next* when done.
 
@@ -199,33 +158,6 @@ The wizard guides you through a step-by-step process to build a dynamic world. B
 
 <img width="1857" height="1048" alt="Coming Soon" src="https://github.com/user-attachments/assets/56a646ee-42cc-4d98-b168-8dd1ad0e1214" />
 
-## Future Visions
-
-**Dynamic World Generator Wizard** is a foundation for an open-source simulation world builder. Planned enhancements include:
-
-* **Isaac Sim Support**: Full integration with *Isaac Sim 4.5.0* and *5.0.0* for advanced simulations.
-* **Additional Motion Types**: Sinusoidal, random walk, or spline-based paths.
-* **Export Options**: Support for *ROS2*, *Unity*, or other simulators.
-* **UI Enhancements**: Undo/redo, *3D* preview, and drag-and-drop placement.
-* **Performance Optimizations**: Faster *SDF* generation and real-time updates.
-* **And definitely a lot more!!!**
-
-I’d **love collaborations**! Contribute via pull requests on *GitHub* for bug fixes, new features, or documentation improvements. Reach out via *GitHub Issues* for questions, suggestions, or partnership ideas.
-
-## Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository.
-2. Create a branch (`git checkout -b feature/your-feature`).
-3. Commit changes (`git commit -m "Add your feature"`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
-
-Please include tests and documentation updates. For major changes, discuss in a *GitHub Issue* first.
-
 ---
 
-+ If you have any questions, please let me know: **a.pahlevani1998@gmail.com**
-
-+ Also, don't forget to check out our **website** at: **https://www.SLAMbotics.org**
++ If you have any questions, please let me know: **ali.jafari.fesh@gmail.com**

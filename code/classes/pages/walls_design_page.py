@@ -3,7 +3,9 @@ from PyQt5.QtCore import Qt, QEvent, QPointF
 from PyQt5.QtGui import QColor
 from classes.zoomable_graphics_view import ZoomableGraphicsView
 import os
+import sys
 import shutil
+import subprocess
 from xml.etree import ElementTree as ET
 from utils.config import WORLDS_GAZEBO_DIR, PROJECT_ROOT
 from ament_index_python.packages import get_package_share_directory
@@ -160,8 +162,30 @@ class WallsDesignPage(QWizardPage):
         try:
             self.world_manager.load_world(world_name)
 
-            # Check for PGM map
-            self.world_manager.map_path = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src', 'dynamic_obstacle_gz_spawning', 'maps', f"{world_name}.pgm")
+            # Check for PGM map and auto-generate if missing
+            maps_dir = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src', 'dynamic_obstacle_gz_spawning', 'maps')
+            pgm_path = os.path.join(maps_dir, f"{world_name}.pgm")
+            yaml_path = os.path.join(maps_dir, f"{world_name}.yaml")
+            
+            if not os.path.exists(pgm_path) or not os.path.exists(yaml_path):
+                # Auto-generate map files using sdf2map_cli
+                sdf_path = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src', 'dynamic_obstacle_gz_spawning', 'worlds', f"{world_name}.sdf")
+                if os.path.exists(sdf_path):
+                    try:
+                        sdf2map_cli_path = os.path.join(PROJECT_ROOT, 'code', 'classes', 'sdf2map_cli.py')
+                        cmd = [
+                            sys.executable, sdf2map_cli_path,
+                            sdf_path,
+                            '-o', maps_dir,
+                            '--skip-missing'
+                        ]
+                        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+                        if result.returncode != 0:
+                            print(f"Warning: Map generation failed: {result.stderr}")
+                    except Exception as e:
+                        print(f"Warning: Could not auto-generate map: {e}")
+            
+            self.world_manager.map_path = pgm_path
 
             self.wall_list.clear()
             self.wizard().refresh_canvas(self.scene)
