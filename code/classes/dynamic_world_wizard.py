@@ -281,6 +281,9 @@ class DynamicWorldWizard(QWizard):
         # Initialize world manager for selected simulation
         if sim_type == "gazebo" and version in ["fortress", "harmonic"]:
             self.world_manager = WorldManager(sim_type, version)
+        elif sim_type == "isaacsim" and version in ["450", "500"]:
+            # For Isaac Sim, use Isaac Sim specific world manager
+            self.world_manager = WorldManager(sim_type, version)
         else:
             self.world_manager = None
 
