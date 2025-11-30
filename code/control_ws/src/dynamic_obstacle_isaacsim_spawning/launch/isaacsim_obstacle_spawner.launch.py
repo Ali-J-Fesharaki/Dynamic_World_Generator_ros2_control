@@ -15,19 +15,24 @@
 # Authors: Ali Jafari Fesharaki
 
 """
-Launch file for Isaac Sim dynamic obstacle spawning.
+Launch file for Isaac Sim dynamic obstacle spawning with ros2_control support.
 
 This launch file:
 1. Starts the Isaac Sim spawner node
-2. Configures trajectory publishers for dynamic obstacles
-3. Sets up communication with Isaac Sim via ROS2 bridge
+2. Spawns ros2_control controllers (joint_state_broadcaster, position_controller)
+3. Configures trajectory publishers for dynamic obstacles
+4. Sets up communication with Isaac Sim via ROS2 bridge
 
 Usage:
     ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py
     
     # With custom configuration:
-    ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py \
+    ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py \\
         config_file:=/path/to/obstacles.yaml
+    
+    # Using ros2_control mode (similar to Gazebo):
+    ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py \\
+        use_ros2_control:=true
 """
 
 import os
@@ -38,21 +43,109 @@ from launch.actions import (
     LogInfo,
     OpaqueFunction,
     TimerAction,
+    RegisterEventHandler,
 )
-from launch.substitutions import LaunchConfiguration
+from launch.event_handlers import OnProcessExit
+from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoinSubstitution
 from launch_ros.actions import Node
+from launch.conditions import IfCondition, UnlessCondition
 import yaml
 
 
-def generate_trajectory_nodes(context, *args, **kwargs):
-    """Generate trajectory publisher nodes for each dynamic obstacle."""
+def generate_ros2_control_nodes(context, *args, **kwargs):
+    """Generate ros2_control nodes for each dynamic obstacle."""
     
     package_dir = get_package_share_directory('dynamic_obstacle_isaacsim_spawning')
     config_file = LaunchConfiguration('config_file').perform(context)
     trajectory_output_dir = LaunchConfiguration('trajectory_output_dir').perform(context)
     use_sim_time = LaunchConfiguration('use_sim_time').perform(context)
+    use_ros2_control = LaunchConfiguration('use_ros2_control').perform(context)
     
     nodes = []
+    
+    if use_ros2_control != 'true':
+        return nodes
+    
+    if not os.path.exists(config_file):
+        return nodes
+    
+    # Load configuration
+    with open(config_file, 'r') as f:
+        config = yaml.safe_load(f)
+    
+    obstacles = config.get('obstacles', [])
+    obstacle_controllers = os.path.join(package_dir, 'config', 'obstacles_controller.yaml')
+    
+    for obstacle in obstacles:
+        if not obstacle.get('enabled', True):
+            continue
+        
+        if not obstacle.get('motion'):
+            continue
+        
+        name = obstacle['name']
+        trajectory_file = os.path.join(trajectory_output_dir, f"{name}_trajectory.yaml")
+        
+        # Joint state broadcaster spawner
+        joint_state_broadcaster_spawner = Node(
+            package='controller_manager',
+            executable='spawner',
+            namespace=name,
+            parameters=[{'use_sim_time': use_sim_time == 'true'}],
+            arguments=[
+                'joint_state_broadcaster',
+                '-c', f'/{name}/controller_manager'
+            ],
+            output='screen'
+        )
+        
+        # Position controller spawner
+        position_controller_spawner = Node(
+            package='controller_manager',
+            executable='spawner',
+            namespace=name,
+            parameters=[{'use_sim_time': use_sim_time == 'true'}],
+            arguments=[
+                'position_controller',
+                '--param-file', obstacle_controllers,
+                '-c', f'/{name}/controller_manager'
+            ],
+            output='screen'
+        )
+        
+        # Trajectory publisher node (uses JointTrajectory mode)
+        trajectory_node = Node(
+            package='dynamic_obstacle_isaacsim_spawning',
+            executable='trajectory_publisher',
+            name=f'{name}_trajectory_publisher',
+            namespace=name,
+            parameters=[{
+                'trajectory_file': trajectory_file,
+                'controller_topic': 'position_controller/joint_trajectory',
+                'use_pose_mode': False,  # Use JointTrajectory mode for ros2_control
+                'use_sim_time': use_sim_time == 'true'
+            }],
+            output='screen'
+        )
+        
+        nodes.extend([joint_state_broadcaster_spawner, position_controller_spawner, trajectory_node])
+    
+    return nodes
+
+
+def generate_pose_mode_nodes(context, *args, **kwargs):
+    """Generate trajectory publisher nodes in pose mode (non-ros2_control)."""
+    
+    package_dir = get_package_share_directory('dynamic_obstacle_isaacsim_spawning')
+    config_file = LaunchConfiguration('config_file').perform(context)
+    trajectory_output_dir = LaunchConfiguration('trajectory_output_dir').perform(context)
+    use_sim_time = LaunchConfiguration('use_sim_time').perform(context)
+    use_ros2_control = LaunchConfiguration('use_ros2_control').perform(context)
+    
+    nodes = []
+    
+    if use_ros2_control == 'true':
+        return nodes
     
     if not os.path.exists(config_file):
         return nodes
@@ -81,7 +174,7 @@ def generate_trajectory_nodes(context, *args, **kwargs):
             parameters=[{
                 'trajectory_file': trajectory_file,
                 'controller_topic': 'target_pose',
-                'use_pose_mode': True,
+                'use_pose_mode': True,  # Use PoseStamped mode
                 'use_sim_time': use_sim_time == 'true'
             }],
             output='screen'
@@ -99,6 +192,7 @@ def generate_launch_description():
     
     # Default configuration paths
     default_config = os.path.join(package_dir, 'config', 'obstacles.yaml')
+    default_controllers_config = os.path.join(package_dir, 'config', 'obstacles_controller.yaml')
     
     # Launch arguments
     config_file_arg = DeclareLaunchArgument(
@@ -131,6 +225,18 @@ def generate_launch_description():
         description='Output path for generated spawn script'
     )
     
+    use_ros2_control_arg = DeclareLaunchArgument(
+        'use_ros2_control',
+        default_value='true',
+        description='Use ros2_control with joint_trajectory_controller (true) or pose-based control (false)'
+    )
+    
+    controllers_config_arg = DeclareLaunchArgument(
+        'controllers_config',
+        default_value=default_controllers_config,
+        description='Path to ros2_controllers.yaml configuration file'
+    )
+    
     # Isaac Sim Spawner Node
     spawner_node = Node(
         package='dynamic_obstacle_isaacsim_spawning',
@@ -138,6 +244,7 @@ def generate_launch_description():
         name='isaacsim_spawner',
         parameters=[{
             'config_file': LaunchConfiguration('config_file'),
+            'controllers_config': LaunchConfiguration('controllers_config'),
             'spawn_script_output': LaunchConfiguration('spawn_script_output'),
             'trajectory_output_dir': LaunchConfiguration('trajectory_output_dir'),
             'update_rate': LaunchConfiguration('update_rate'),
@@ -150,14 +257,23 @@ def generate_launch_description():
     log_info = LogInfo(
         msg=[
             'Isaac Sim Obstacle Spawner launched with config: ',
-            LaunchConfiguration('config_file')
+            LaunchConfiguration('config_file'),
+            ' | ros2_control: ',
+            LaunchConfiguration('use_ros2_control')
         ]
     )
     
     # Delayed trajectory node generation (wait for spawner to initialize)
-    trajectory_nodes = TimerAction(
+    # ros2_control mode nodes
+    ros2_control_nodes = TimerAction(
+        period=5.0,
+        actions=[OpaqueFunction(function=generate_ros2_control_nodes)]
+    )
+    
+    # Pose mode nodes (non-ros2_control)
+    pose_mode_nodes = TimerAction(
         period=2.0,
-        actions=[OpaqueFunction(function=generate_trajectory_nodes)]
+        actions=[OpaqueFunction(function=generate_pose_mode_nodes)]
     )
     
     return LaunchDescription([
@@ -167,6 +283,8 @@ def generate_launch_description():
         update_rate_arg,
         trajectory_output_dir_arg,
         spawn_script_output_arg,
+        use_ros2_control_arg,
+        controllers_config_arg,
         
         # Log info
         log_info,
@@ -174,6 +292,8 @@ def generate_launch_description():
         # Spawner node
         spawner_node,
         
-        # Trajectory publishers
-        trajectory_nodes,
+        # Trajectory publishers (ros2_control or pose mode)
+        ros2_control_nodes,
+        pose_mode_nodes,
     ])
+

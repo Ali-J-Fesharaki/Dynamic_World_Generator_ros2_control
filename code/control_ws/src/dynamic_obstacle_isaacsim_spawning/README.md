@@ -147,14 +147,40 @@ obstacles:
 
 ## ROS2 Control Integration
 
-### Isaac Sim ROS2 Bridge
+This package supports two control modes:
 
-Isaac Sim provides native ROS2 support through its ROS2 Bridge extension. This package uses:
+### 1. ROS2 Control Mode (Default, Recommended)
 
-1. **Pose-based control**: Publishes `geometry_msgs/PoseStamped` messages
-2. **Motion controllers**: Built-in Python motion controllers that update obstacle transforms
+Uses `ros2_control` with `joint_trajectory_controller`, similar to the Gazebo package.
 
-### Topics
+```bash
+# Launch with ros2_control (default)
+ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py use_ros2_control:=true
+```
+
+**Architecture:**
+- Uses prismatic joints (joint_x, joint_y, joint_z) for XYZ motion
+- `joint_trajectory_controller/JointTrajectoryController` for position control
+- `joint_state_broadcaster` for state feedback
+- Trajectory publisher sends `trajectory_msgs/JointTrajectory` messages
+
+**Topics (ros2_control mode):**
+
+| Topic | Type | Description |
+|-------|------|-------------|
+| `/{name}/position_controller/joint_trajectory` | `trajectory_msgs/JointTrajectory` | Joint trajectory commands |
+| `/{name}/joint_states` | `sensor_msgs/JointState` | Joint state feedback |
+
+### 2. Pose-Based Control Mode (Legacy)
+
+Uses direct pose updates through the ROS2 Bridge (original approach).
+
+```bash
+# Launch with pose-based control
+ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py use_ros2_control:=false
+```
+
+**Topics (pose mode):**
 
 | Topic | Type | Description |
 |-------|------|-------------|
@@ -167,6 +193,33 @@ Isaac Sim provides native ROS2 support through its ROS2 Bridge extension. This p
 |---------|------|-------------|
 | `/spawn_all_obstacles` | `std_srvs/Trigger` | Spawn all configured obstacles |
 | `/generate_spawn_script` | `std_srvs/Trigger` | Generate Python spawn script |
+
+### Controller Configuration
+
+The controller configuration is defined in `config/obstacles_controller.yaml`:
+
+```yaml
+/**/controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+/**/position_controller:
+  ros__parameters:
+    type: joint_trajectory_controller/JointTrajectoryController
+    joints:
+      - joint_x
+      - joint_y
+      - joint_z
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+```
 
 ## Person Characters
 
@@ -202,8 +255,9 @@ The neural network receives Isaac Sim environment variables:
 
 | Feature | Gazebo Package | Isaac Sim Package |
 |---------|----------------|-------------------|
-| Model Format | XACRO/SDF | USD/Python API |
-| Motion Control | ROS2 Controllers | Native Python + Poses |
+| Model Format | XACRO/SDF | USD/URDF + Python API |
+| Motion Control | ROS2 Controllers | ROS2 Controllers (default) or Pose-based |
+| Controller Type | `joint_trajectory_controller` | `joint_trajectory_controller` |
 | Person Support | No | Yes (via Pegasus) |
 | Physics | Gazebo Physics | PhysX |
 | Visualization | Gazebo GUI | Isaac Sim GUI |

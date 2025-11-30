@@ -415,6 +415,247 @@ def calculate_inertia(
     return mass, ixx, iyy, izz
 
 
+# ============================================================================
+# ROS2 Control URDF Generation (Similar to Gazebo package)
+# ============================================================================
+
+def generate_geometry_urdf(obstacle_type: str, size: Tuple[float, ...]) -> str:
+    """
+    Generate geometry URDF XML for different obstacle types.
+    
+    Args:
+        obstacle_type: Type of obstacle ('box', 'cylinder', 'sphere')
+        size: Size parameters
+    
+    Returns:
+        URDF XML string for geometry
+    """
+    if obstacle_type == "box":
+        w, l, h = size
+        return f'<box size="{w:.6f} {l:.6f} {h:.6f}"/>'
+    elif obstacle_type == "cylinder":
+        r, h = size
+        return f'<cylinder radius="{r:.6f}" length="{h:.6f}"/>'
+    elif obstacle_type == "sphere":
+        r = size[0]
+        return f'<sphere radius="{r:.6f}"/>'
+    else:
+        return '<box size="1 1 1"/>'
+
+
+def generate_ros2_control_urdf(
+    obstacle_name: str,
+    controllers_config_path: str
+) -> str:
+    """
+    Generate the ros2_control URDF block for Isaac Sim.
+    
+    Uses topic_based_ros2_control for Isaac Sim integration.
+    
+    Args:
+        obstacle_name: Name of the obstacle for namespacing
+        controllers_config_path: Path to the ros2_controllers.yaml file
+    
+    Returns:
+        URDF XML string containing the ros2_control configuration
+    """
+    return f'''    <ros2_control name="{obstacle_name}" type="system">
+        <hardware>
+            <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+            <param name="joint_commands_topic">/{obstacle_name}/joint_commands</param>
+            <param name="joint_states_topic">/{obstacle_name}/joint_states</param>
+        </hardware>
+        <joint name="joint_x">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint_y">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint_z">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+'''
+
+
+def generate_prismatic_joints_urdf(obstacle_name: str, base_z: float = 0.0) -> str:
+    """
+    Generate three orthogonal unlimited-range prismatic joints for XYZ motion.
+    
+    Args:
+        obstacle_name: Name of the obstacle model
+        base_z: Z-coordinate for the base link (default 0.0)
+    
+    Returns:
+        URDF XML string containing link and joint definitions
+    """
+    # Consistent joint limits for all axes
+    joint_effort = 1000.0
+    joint_velocity = 100.0
+    
+    return f'''
+    <!-- Prismatic joint structure for {obstacle_name} -->
+    <link name="$(arg namespace)/link_x">
+        <inertial>
+            <origin xyz="0 0 {base_z:.6f}" rpy="0 0 0"/>
+            <mass value="0.001"/>
+            <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+        </inertial>
+    </link>
+    
+    <link name="$(arg namespace)/link_y">
+        <inertial>
+            <origin xyz="0 0 {base_z:.6f}" rpy="0 0 0"/>
+            <mass value="0.001"/>
+            <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+        </inertial>
+    </link>
+    
+    <link name="$(arg namespace)/link_z">
+        <inertial>
+            <origin xyz="0 0 {base_z:.6f}" rpy="0 0 0"/>
+            <mass value="0.001"/>
+            <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+        </inertial>
+    </link>
+
+    <joint name="joint_x" type="prismatic">
+        <parent link="world"/>
+        <child link="$(arg namespace)/link_x"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-1e9" upper="1e9" effort="{joint_effort}" velocity="{joint_velocity}"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="joint_y" type="prismatic">
+        <parent link="$(arg namespace)/link_x"/>
+        <child link="$(arg namespace)/link_y"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="-1e9" upper="1e9" effort="{joint_effort}" velocity="{joint_velocity}"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="joint_z" type="prismatic">
+        <parent link="$(arg namespace)/link_y"/>
+        <child link="$(arg namespace)/link_z"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1e9" upper="1e9" effort="{joint_effort}" velocity="{joint_velocity}"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="fixed_joint" type="fixed">
+        <parent link="$(arg namespace)/link_z"/>
+        <child link="$(arg namespace)/link"/>
+    </joint>
+'''
+
+
+def generate_obstacle_urdf(
+    name: str,
+    obstacle_type: str,
+    x_pose: float,
+    y_pose: float,
+    z_pose: float,
+    size: Tuple[float, ...],
+    color: str = "gray",
+    has_motion: bool = False,
+    controllers_config_path: Optional[str] = None
+) -> str:
+    """
+    Generate complete URDF model for an obstacle with ros2_control support.
+    
+    Similar to the Gazebo package's XACRO generation but for Isaac Sim.
+    
+    Args:
+        name: Unique name for the obstacle
+        obstacle_type: Type of obstacle ('box', 'cylinder', 'sphere')
+        x_pose: X position in world frame
+        y_pose: Y position in world frame
+        z_pose: Z position in world frame
+        size: Size parameters (depends on obstacle_type)
+        color: Color name (default 'gray')
+        has_motion: Whether obstacle is dynamic (default False)
+        controllers_config_path: Path to ros2_controllers.yaml (required if has_motion=True)
+    
+    Returns:
+        Complete URDF XML string for the obstacle model
+    """
+    color_rgba = get_color_rgba(color)
+    
+    # Start URDF definition
+    urdf = f'''<?xml version="1.0"?>
+<robot name="{name}" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:arg name="namespace" default="{name}"/>
+    <link name="world"/>
+'''
+    
+    # Add prismatic joints for dynamic obstacles
+    if has_motion:
+        urdf += generate_prismatic_joints_urdf(name, base_z=0.0)
+    
+    # Main link definition
+    urdf += f'''
+    <link name="$(arg namespace)/link">'''
+    
+    # Geometry
+    geometry_urdf = generate_geometry_urdf(obstacle_type, size)
+    
+    urdf += f'''
+        <collision name="collision">
+            <geometry>
+                {geometry_urdf}
+            </geometry>
+        </collision>
+        <visual name="visual">
+            <geometry>
+                {geometry_urdf}
+            </geometry>
+            <material name="{color}">
+                <color rgba="{color_rgba[0]} {color_rgba[1]} {color_rgba[2]} {color_rgba[3]}"/>
+            </material>
+        </visual>'''
+    
+    # Add inertial properties
+    mass, ixx, iyy, izz = calculate_inertia(obstacle_type, size)
+    if not has_motion:
+        mass = 0.001
+        ixx = iyy = izz = 0.000001
+    
+    urdf += f'''
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="{mass:.6f}"/>
+            <inertia ixx="{ixx:.6f}" ixy="0" ixz="0" iyy="{iyy:.6f}" iyz="0" izz="{izz:.6f}"/>
+        </inertial>
+    </link>
+'''
+    
+    # For static obstacles, add a fixed joint to world
+    if not has_motion:
+        urdf += f'''
+    <joint name="fixed_to_world" type="fixed">
+        <parent link="world"/>
+        <child link="$(arg namespace)/link"/>
+        <origin xyz="{x_pose} {y_pose} {z_pose}" rpy="0 0 0"/>
+    </joint>
+'''
+    
+    # Add ros2_control for dynamic obstacles
+    if has_motion and controllers_config_path:
+        urdf += "\n" + generate_ros2_control_urdf(name, controllers_config_path)
+    
+    urdf += '''
+</robot>'''
+    
+    return urdf
+
+
 def generate_usd_python_script(
     name: str,
     obstacle_type: str,
@@ -950,6 +1191,32 @@ Generated by dynamic_obstacle_isaacsim_spawning package.
             filename = os.path.join(output_dir, f"{obstacle['name']}_trajectory.yaml")
             with open(filename, 'w') as f:
                 yaml.dump(trajectory_data, f, default_flow_style=None)
+    
+    def generate_obstacle_urdf(self, obstacle_params: Dict[str, Any]) -> str:
+        """
+        Generate URDF for a single obstacle with ros2_control support.
+        
+        Args:
+            obstacle_params: Parsed obstacle parameters
+        
+        Returns:
+            URDF XML string
+        """
+        if obstacle_params['type'] == 'person':
+            # Persons use USD-based spawning, not URDF
+            return None
+        
+        return generate_obstacle_urdf(
+            name=obstacle_params['name'],
+            obstacle_type=obstacle_params['type'],
+            x_pose=obstacle_params['x_pose'],
+            y_pose=obstacle_params['y_pose'],
+            z_pose=obstacle_params['z_pose'],
+            size=obstacle_params['size'],
+            color=obstacle_params['color'],
+            has_motion=obstacle_params['has_motion'],
+            controllers_config_path=self.controllers_config_path
+        )
     
     def save_spawn_script_to_file(self, output_path: str):
         """
