@@ -1,0 +1,142 @@
+# Isaac Sim Dynamic Obstacles Configuration
+# This file defines obstacles to be spawned in Isaac Sim
+#
+# Supported obstacle types:
+#   - box: Rectangular cuboid (size: [width, length, height])
+#   - cylinder: Cylinder (size: [radius, height])
+#   - sphere: Sphere (size: [radius])
+#   - person: Animated character (requires Pegasus Simulator extension)
+#
+# Supported motion types:
+#   - circle: Circular motion around a center point
+#   - linear: Back-and-forth motion along a path
+#   - elliptical: Elliptical motion path
+#   - polygon: Motion along multiple waypoints
+#   - neural_network: Motion controlled by a neural network model
+#
+# Colors: red, green, blue, yellow, cyan, magenta, white, black, gray, orange, purple
+
+obstacles:
+  # Example box obstacle with linear motion
+  - name: box_1
+    type: box
+    color: red
+    enabled: true
+    x_pose: 4.0
+    y_pose: 0.0
+    z_pose: 0.5
+    size: [1.0, 1.0, 1.0]
+    motion:
+      type: linear
+      velocity: 1.5
+      std: 0.0
+      path:
+        - [4.0, 0.0]
+        - [4.0, 10.0]
+
+  # Example cylinder with circular motion
+  - name: cylinder_1
+    type: cylinder
+    color: blue
+    enabled: true
+    x_pose: -3.0
+    y_pose: 0.0
+    z_pose: 0.5
+    size: [0.5, 1.0]
+    motion:
+      type: circle
+      center: [0.0, 0.0]
+      radius: 3.0
+      velocity: 1.0
+
+  # Static sphere obstacle
+  - name: sphere_1
+    type: sphere
+    color: green
+    enabled: true
+    x_pose: 0.0
+    y_pose: 5.0
+    z_pose: 0.5
+    size: [0.5]
+
+  # Example person with circular walking pattern
+  - name: person_1
+    type: person
+    character_type: male_adult_construction
+    enabled: true
+    x_pose: 5.0
+    y_pose: 0.0
+    z_pose: 0.0
+    size: []
+    motion:
+      type: circle
+      radius: 5.0
+      velocity: 1.0
+
+  # Example person with linear walking pattern
+  - name: person_2
+    type: person
+    character_type: female_adult_business
+    enabled: true
+    x_pose: -5.0
+    y_pose: 0.0
+    z_pose: 0.0
+    size: []
+    motion:
+      type: linear
+      velocity: 1.5
+      path:
+        - [-5.0, 0.0]
+        - [-5.0, 10.0]
+
+  # Example obstacle with elliptical motion
+  - name: box_ellipse
+    type: box
+    color: orange
+    enabled: false
+    x_pose: 0.0
+    y_pose: -5.0
+    z_pose: 0.5
+    size: [0.8, 0.8, 0.8]
+    motion:
+      type: elliptical
+      semi_major: 4.0
+      semi_minor: 2.0
+      angle: 0.0
+      velocity: 1.2
+
+  # Example obstacle with polygon path
+  - name: box_polygon
+    type: box
+    color: purple
+    enabled: false
+    x_pose: 0.0
+    y_pose: 0.0
+    z_pose: 0.5
+    size: [0.6, 0.6, 0.6]
+    motion:
+      type: polygon
+      velocity: 1.0
+      path:
+        - [0.0, 0.0]
+        - [5.0, 0.0]
+        - [5.0, 5.0]
+        - [0.0, 5.0]
+
+  # Example obstacle with neural network motion (placeholder)
+  - name: nn_obstacle
+    type: sphere
+    color: cyan
+    enabled: false
+    x_pose: 8.0
+    y_pose: 8.0
+    z_pose: 0.5
+    size: [0.4]
+    motion:
+      type: neural_network
+      model_path: ""  # Path to trained model (.pt, .onnx, or .h5)
+      # Neural network receives Isaac Sim environment variables:
+      # - current_position: [x, y, z]
+      # - nearby_obstacles: list of positions
+      # - target_position: optional goal
+      # - velocity: current velocity
