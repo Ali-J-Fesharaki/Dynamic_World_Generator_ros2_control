@@ -44,12 +44,12 @@ def sanitize_class_name(name: str) -> str:
     """
     # Remove invalid characters and replace with underscores
     sanitized = re.sub(r'[^a-zA-Z0-9_]', '_', name)
-    # Ensure it starts with a letter or underscore
-    if sanitized and sanitized[0].isdigit():
-        sanitized = '_' + sanitized
     # Convert to title case and remove underscores for class name
     parts = sanitized.split('_')
     class_name = ''.join(part.capitalize() for part in parts if part)
+    # Ensure it starts with a letter (add prefix if it starts with digit)
+    if class_name and class_name[0].isdigit():
+        class_name = 'Obs' + class_name
     # Ensure we have something
     return class_name if class_name else 'DefaultClass'
 
