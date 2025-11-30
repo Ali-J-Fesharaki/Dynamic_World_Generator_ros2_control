@@ -27,8 +27,31 @@ import os
 import yaml
 import math
 import random
+import re
 from typing import Literal, Tuple, Optional, Dict, Any, List
 from abc import ABC, abstractmethod
+
+
+def sanitize_class_name(name: str) -> str:
+    """
+    Sanitize a string to be a valid Python class name.
+    
+    Args:
+        name: Input string
+    
+    Returns:
+        Valid Python class name
+    """
+    # Remove invalid characters and replace with underscores
+    sanitized = re.sub(r'[^a-zA-Z0-9_]', '_', name)
+    # Ensure it starts with a letter or underscore
+    if sanitized and sanitized[0].isdigit():
+        sanitized = '_' + sanitized
+    # Convert to title case and remove underscores for class name
+    parts = sanitized.split('_')
+    class_name = ''.join(part.capitalize() for part in parts if part)
+    # Ensure we have something
+    return class_name if class_name else 'DefaultClass'
 
 
 # ============================================================================
@@ -443,10 +466,9 @@ prim = create_prim(
 geom = UsdGeom.Gprim(prim)
 geom.CreateDisplayColorAttr(value=[({color_rgba[0]}, {color_rgba[1]}, {color_rgba[2]})])
 
-# Add physics if dynamic
-{"if True:" if has_motion else "if False:"}
-    UsdPhysics.RigidBodyAPI.Apply(prim)
-    UsdPhysics.CollisionAPI.Apply(prim)
+# Add physics for collision
+UsdPhysics.CollisionAPI.Apply(prim)
+{f"UsdPhysics.RigidBodyAPI.Apply(prim)  # Dynamic obstacle" if has_motion else "# Static obstacle - no rigid body"}
 '''
     elif obstacle_type == "cylinder":
         r, h = size
@@ -467,10 +489,9 @@ prim = create_prim(
 geom = UsdGeom.Gprim(prim)
 geom.CreateDisplayColorAttr(value=[({color_rgba[0]}, {color_rgba[1]}, {color_rgba[2]})])
 
-# Add physics if dynamic
-{"if True:" if has_motion else "if False:"}
-    UsdPhysics.RigidBodyAPI.Apply(prim)
-    UsdPhysics.CollisionAPI.Apply(prim)
+# Add physics for collision
+UsdPhysics.CollisionAPI.Apply(prim)
+{f"UsdPhysics.RigidBodyAPI.Apply(prim)  # Dynamic obstacle" if has_motion else "# Static obstacle - no rigid body"}
 '''
     elif obstacle_type == "sphere":
         r = size[0]
@@ -491,10 +512,9 @@ prim = create_prim(
 geom = UsdGeom.Gprim(prim)
 geom.CreateDisplayColorAttr(value=[({color_rgba[0]}, {color_rgba[1]}, {color_rgba[2]})])
 
-# Add physics if dynamic
-{"if True:" if has_motion else "if False:"}
-    UsdPhysics.RigidBodyAPI.Apply(prim)
-    UsdPhysics.CollisionAPI.Apply(prim)
+# Add physics for collision
+UsdPhysics.CollisionAPI.Apply(prim)
+{f"UsdPhysics.RigidBodyAPI.Apply(prim)  # Dynamic obstacle" if has_motion else "# Static obstacle - no rigid body"}
 '''
     else:
         script = f'# Unknown obstacle type: {obstacle_type}'
@@ -554,6 +574,8 @@ def generate_person_spawn_script(
         Python script code as string
     """
     asset_name = PERSON_ASSETS.get(character_type, character_type)
+    # Sanitize name for use as class name
+    class_name = sanitize_class_name(name)
     
     script = f'''
 # Spawn person: {name}
@@ -562,7 +584,7 @@ try:
     from pegasus.simulator.logic.people.person import Person
     from pegasus.simulator.logic.people.person_controller import PersonController
     
-    class {name.title()}Controller(PersonController):
+    class {class_name}Controller(PersonController):
         """Custom controller for {name}"""
         
         def __init__(self):
@@ -581,7 +603,7 @@ try:
             ])
     
     # Create the person with controller
-    controller = {name.title()}Controller()
+    controller = {class_name}Controller()
     person = Person(
         "{name}",
         "{asset_name}",

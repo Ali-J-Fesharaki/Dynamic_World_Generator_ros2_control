@@ -7,7 +7,7 @@ package_name = 'dynamic_obstacle_isaacsim_spawning'
 setup(
     name=package_name,
     version='0.0.1',
-    packages=find_packages(where='.', include=['isaacsim_scripts', 'isaacsim_scripts.*']),
+    packages=find_packages(where='.', include=['dynamic_obstacle_isaacsim_spawning', 'isaacsim_scripts', 'isaacsim_scripts.*']),
     package_dir={'': '.'},
     data_files=[
         (f'share/{package_name}', ['package.xml']),

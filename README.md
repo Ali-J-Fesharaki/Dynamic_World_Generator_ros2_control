@@ -2,11 +2,17 @@
 
 ![Dynamic World Generator Wizard Banner](https://github.com/user-attachments/assets/1b00aa22-24d7-40f1-8526-a3612bd7f503)
 
-**Dynamic World Generator Wizard** is a *PyQt5*-based graphical user interface (*GUI*) application designed to create and manage dynamic simulation worlds for *Gazebo* (*Harmonic* or *Fortress* versions). It allows users to build custom worlds with walls, static obstacles (boxes, cylinders, spheres), and dynamic obstacles with various motion paths (linear, elliptical, polygon).
+**Dynamic World Generator Wizard** is a *PyQt5*-based graphical user interface (*GUI*) application designed to create and manage dynamic simulation worlds for *Gazebo* (*Harmonic* or *Fortress* versions) and **NVIDIA Isaac Sim**. It allows users to build custom worlds with walls, static obstacles (boxes, cylinders, spheres), and dynamic obstacles with various motion paths (linear, elliptical, polygon).
 
 **Major Update (V2):** The backend has been completely re-engineered to use **ROS 2 Control**. Unlike the previous version which only visualized moving objects, this version ensures **superior dynamic obstacle collision handling**. Obstacles are spawned and controlled via ROS 2, providing realistic physics interactions and collision responses, making it ideal for testing autonomous navigation and collision avoidance algorithms.
 
-The wizard guides users through a step-by-step process, ensuring an intuitive experience. It supports creating new worlds from empty templates, loading existing ones, and applying changes in real-time to *Gazebo*.
+**NEW: Isaac Sim Support** - The wizard now supports NVIDIA Isaac Sim 4.5+, enabling:
+- Spawning obstacles in Isaac Sim using USD format
+- Animated person characters via Pegasus Simulator
+- Neural network motion controller interface for ML-based motion
+- ROS2 integration via Isaac Sim's ROS2 Bridge
+
+The wizard guides users through a step-by-step process, ensuring an intuitive experience. It supports creating new worlds from empty templates, loading existing ones, and applying changes in real-time to *Gazebo* or *Isaac Sim*.
 
 🙏 A special thanks to **Professor Sousso KELOUWANI** for his excellent idea that inspired the creation of this application.
 
@@ -32,6 +38,10 @@ The wizard guides users through a step-by-step process, ensuring an intuitive ex
     ```bash
     pip install gz-transport13 gz-msgs10
     ```
+* **Isaac Sim** (Optional): Install *Isaac Sim 4.5+* for Isaac Sim support.
+  * Download from: [https://developer.nvidia.com/isaac-sim](https://developer.nvidia.com/isaac-sim)
+  * For animated person characters, install [Pegasus Simulator](https://github.com/PegasusSimulator/PegasusSimulator)
+  * Enable ROS2 Bridge extension in Isaac Sim for ROS2 integration
 * **ROS 2 Packages**: Ensure `ros2_control`, `ros2_controllers`, and `gazebo_ros_pkgs` are installed.
   ```bash
   sudo apt install ros-<distro>-ros2-control ros-<distro>-ros2-controllers ros-<distro>-gazebo-ros-pkgs
@@ -85,7 +95,7 @@ The wizard guides you through a step-by-step process to build a dynamic world. B
 * **Choose Simulation**:
   * **Gazebo Harmonic (Recommended)**: Select for the latest features. Recommended for the best outcome and results.
   * **Gazebo Fortress**: Supported, but Harmonic is preferred for better integration.
-  * **Isaac Sim**: Under development, currently disabled.
+  * **Isaac Sim 4.5**: Select for NVIDIA Isaac Sim simulation with USD models and PhysX physics. Supports animated person characters via Pegasus Simulator.
   * Click *Next* when done.
 
 <img width="1857" height="1048" alt="Simulation Selection" src="https://github.com/user-attachments/assets/7d7aa432-506c-49c9-9ad2-50e3b1d29ad7" />

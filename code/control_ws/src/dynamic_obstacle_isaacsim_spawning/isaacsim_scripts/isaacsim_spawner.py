@@ -192,9 +192,14 @@ class IsaacSimSpawnerNode(Node):
             
             response.success = True
             response.message = f"Spawned {len(self.obstacles)} obstacles"
-        except (TypeError, ValueError) as e:
+        except (TypeError, ValueError, KeyError, AttributeError) as e:
             response.success = False
-            response.message = str(e)
+            response.message = f"Error spawning obstacles: {str(e)}"
+            self.get_logger().error(response.message)
+        except Exception as e:
+            response.success = False
+            response.message = f"Unexpected error: {str(e)}"
+            self.get_logger().error(response.message)
         
         return response
     
@@ -210,9 +215,14 @@ class IsaacSimSpawnerNode(Node):
             response.success = True
             response.message = f"Script saved to {self.spawn_script_output}"
             self.get_logger().info(response.message)
-        except (OSError, IOError) as e:
+        except (OSError, IOError, PermissionError) as e:
             response.success = False
-            response.message = str(e)
+            response.message = f"File error: {str(e)}"
+            self.get_logger().error(response.message)
+        except Exception as e:
+            response.success = False
+            response.message = f"Unexpected error: {str(e)}"
+            self.get_logger().error(response.message)
         
         return response
 
