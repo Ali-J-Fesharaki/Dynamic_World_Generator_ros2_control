@@ -31,6 +31,10 @@ class AppState(QObject):
             self.world_manager = WorldManager(sim_type, version)
             self.simulationSet.emit(sim_type, version)
             self.status(f"Simulation: Gazebo {version.title()}", "success")
+        elif sim_type == "isaacsim":
+            self.world_manager = WorldManager(sim_type, version)
+            self.simulationSet.emit(sim_type, version)
+            self.status(f"Simulation: Isaac Sim {version}", "success")
         else:
             self.world_manager = None
 
