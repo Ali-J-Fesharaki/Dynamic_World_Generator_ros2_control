@@ -177,7 +177,7 @@ class ObstaclesPanel(QWidget):
 
         # ─ Actions ────────────────────────────────────────────
         s4 = QLabel("Actions"); make_section_label(s4); lv.addWidget(s4)
-        ab = QPushButton("🚀  Apply & Launch"); make_primary_button(ab)
+        ab = QPushButton("▶  Apply & Preview"); make_primary_button(ab)
         ab.setMinimumHeight(Dims.BUTTON_HEIGHT_LG)
         ab.clicked.connect(self._launch); lv.addWidget(ab)
         eb = QPushButton("💾  Export YAML")
@@ -500,14 +500,16 @@ class ObstaclesPanel(QWidget):
         for m in wm.models:
             if m["type"] in ("box","cylinder","sphere"): m["external_spawn"]=True
         try:
+            wm.apply_changes()
+            
             cfg = os.path.join(get_package_share_directory("dynamic_obstacle_gz_spawning"),"config","obstacles.yaml")
             self._export(cfg)
-            setup = os.path.join(PROJECT_ROOT,"code","control_ws","install","setup.zsh")
-            cmd = f"source {setup} && ros2 launch dynamic_obstacle_gz_spawning multi_obstacle_world.launch.py world_name:={wm.world_name}"
-            subprocess.Popen(["gnome-terminal","--","zsh","-c",f"{cmd}; exec zsh"])
             self._refresh()
-            self._s("Launched ROS 2 spawner","success")
-            QMessageBox.information(self,"Success",f"Launched spawner.\nYAML: {cfg}")
+            
+            has_dynamic = any("motion" in m.get("properties", {}) for m in wm.models if m["type"] in ("box","cylinder","sphere") and m.get("status") != "removed")
+            
+            self.app.launch_preview(use_ros_launch=has_dynamic)
+            
         except Exception as e:
             QMessageBox.critical(self,"Error",str(e))
 
@@ -517,6 +519,8 @@ class ObstaclesPanel(QWidget):
         obs = []
         for m in wm.models:
             if m.get("status")=="removed" or m["type"]=="wall" or m["type"] not in ("box","cylinder","sphere"):
+                continue
+            if "motion" not in m.get("properties", {}):
                 continue
             o = {"name":m["name"],"type":m["type"],"color":m["properties"].get("color","gray").lower(),
                  "enabled":True,"x_pose":float(m["properties"]["position"][0]),

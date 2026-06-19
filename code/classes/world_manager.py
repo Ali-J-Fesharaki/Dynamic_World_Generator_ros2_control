@@ -53,10 +53,17 @@ class WorldManager:
             if world_elem is not None:
                 world_elem.set("name", self.world_name)
                 
-                # 2. Append all walls as models
+                # 2. Append all walls and static obstacles as models
                 for m in self.models:
-                    if m["type"] == "wall" and m.get("status") != "removed":
-                        props = m["properties"]
+                    if m.get("status") == "removed":
+                        continue
+                        
+                    props = m["properties"]
+                    color_name = props.get("color", "Gray")
+                    from utils.color_utils import get_color
+                    r, g, b = get_color(color_name)
+                    
+                    if m["type"] == "wall":
                         sx, sy = props["start"]
                         ex, ey = props["end"]
                         w = props["width"]
@@ -86,9 +93,52 @@ class WorldManager:
                             if geom_type == "visual":
                                 mat = ET.SubElement(comp_elem, "material")
                                 amb = ET.SubElement(mat, "ambient")
-                                amb.text = "0.7 0.7 0.7 1"
+                                amb.text = f"{r} {g} {b} 1"
                                 dif = ET.SubElement(mat, "diffuse")
-                                dif.text = "0.7 0.7 0.7 1"
+                                dif.text = f"{r} {g} {b} 1"
+                                
+                    elif m["type"] in ("box", "cylinder", "sphere"):
+                        # If it has motion, it's spawned by ROS2 via yaml, not SDF
+                        if "motion" in props:
+                            continue
+                            
+                        # Otherwise it's static, add to SDF
+                        cx, cy, cz = props["position"]
+                        model_elem = ET.SubElement(world_elem, "model", name=m["name"])
+                        static_elem = ET.SubElement(model_elem, "static")
+                        static_elem.text = "true"
+                        pose_elem = ET.SubElement(model_elem, "pose")
+                        pose_elem.text = f"{cx:.3f} {cy:.3f} {cz:.3f} 0 0 0"
+                        
+                        link_elem = ET.SubElement(model_elem, "link", name="link")
+                        for geom_type in ["collision", "visual"]:
+                            comp_elem = ET.SubElement(link_elem, geom_type, name=geom_type)
+                            geom = ET.SubElement(comp_elem, "geometry")
+                            
+                            if m["type"] == "box":
+                                w, l, hi = props["size"]
+                                shape = ET.SubElement(geom, "box")
+                                size = ET.SubElement(shape, "size")
+                                size.text = f"{w:.3f} {l:.3f} {hi:.3f}"
+                            elif m["type"] == "cylinder":
+                                rad, hi = props["size"]
+                                shape = ET.SubElement(geom, "cylinder")
+                                r_el = ET.SubElement(shape, "radius")
+                                r_el.text = f"{rad:.3f}"
+                                l_el = ET.SubElement(shape, "length")
+                                l_el.text = f"{hi:.3f}"
+                            elif m["type"] == "sphere":
+                                rad = props["size"][0]
+                                shape = ET.SubElement(geom, "sphere")
+                                r_el = ET.SubElement(shape, "radius")
+                                r_el.text = f"{rad:.3f}"
+                                
+                            if geom_type == "visual":
+                                mat = ET.SubElement(comp_elem, "material")
+                                amb = ET.SubElement(mat, "ambient")
+                                amb.text = f"{r} {g} {b} 1"
+                                dif = ET.SubElement(mat, "diffuse")
+                                dif.text = f"{r} {g} {b} 1"
                                 
             # 3. Save to src directory
             src_path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src",

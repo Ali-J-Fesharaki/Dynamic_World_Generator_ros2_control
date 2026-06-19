@@ -235,7 +235,7 @@ def generate_launch_description():
 
         delay_time = 5.0  # seconds
         delay_node = TimerAction(
-            period=delay_time * obstacles.index(obstacle),
+            period=7.0 + (delay_time * obstacles.index(obstacle)),
             actions=actions
         )
         ld.add_action(delay_node)

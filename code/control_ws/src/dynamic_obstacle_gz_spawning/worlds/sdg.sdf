@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.8">
-  <world name="asd">
+  <world name="sdg">
     <physics name="1ms" type="ode">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -89,5 +89,5 @@
         <falloff>0</falloff>
       </spot>
     </light>
-  <model name="wall_1"><static>true</static><pose>0.100 0.850 0.750 0 0 -0.179</pose><link name="link"><collision name="collision"><geometry><box><size>7.316 0.200 1.500</size></box></geometry></collision><visual name="visual"><geometry><box><size>7.316 0.200 1.500</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual></link></model><model name="wall_2"><static>true</static><pose>-0.850 0.100 0.750 0 0 -1.787</pose><link name="link"><collision name="collision"><geometry><box><size>5.120 0.200 1.500</size></box></geometry></collision><visual name="visual"><geometry><box><size>5.120 0.200 1.500</size></box></geometry><material><ambient>0.9 0.4 0.6 1</ambient><diffuse>0.9 0.4 0.6 1</diffuse></material></visual></link></model><model name="wall_3"><static>true</static><pose>-0.350 0.850 0.750 0 0 0.391</pose><link name="link"><collision name="collision"><geometry><box><size>9.192 0.200 1.500</size></box></geometry></collision><visual name="visual"><geometry><box><size>9.192 0.200 1.500</size></box></geometry><material><ambient>0.9 0.2 0.2 1</ambient><diffuse>0.9 0.2 0.2 1</diffuse></material></visual></link></model></world>
+  <model name="wall_1"><static>true</static><pose>1.950 1.050 0.750 0 0 -0.145</pose><link name="link"><collision name="collision"><geometry><box><size>8.994 0.200 1.500</size></box></geometry></collision><visual name="visual"><geometry><box><size>8.994 0.200 1.500</size></box></geometry><material><ambient>0.7 0.7 0.7 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material></visual></link></model><model name="wall_2"><static>true</static><pose>2.650 -1.650 0.750 0 0 -2.651</pose><link name="link"><collision name="collision"><geometry><box><size>8.276 0.200 1.500</size></box></geometry></collision><visual name="visual"><geometry><box><size>8.276 0.200 1.500</size></box></geometry><material><ambient>0.7 0.7 0.7 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material></visual></link></model><model name="wall_3"><static>true</static><pose>-1.750 -0.950 0.750 0 0 -1.295</pose><link name="link"><collision name="collision"><geometry><box><size>5.508 0.200 1.500</size></box></geometry></collision><visual name="visual"><geometry><box><size>5.508 0.200 1.500</size></box></geometry><material><ambient>0.7 0.7 0.7 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material></visual></link></model></world>
 </sdf>

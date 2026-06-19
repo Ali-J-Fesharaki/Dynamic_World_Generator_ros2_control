@@ -210,20 +210,7 @@ class WallsPanel(QWidget):
             self.app.status("Wall changes applied", "success")
             
             # Launch preview
-            from utils.config import PROJECT_ROOT
-            import subprocess, os
-            
-            # Try bash first, fallback to zsh
-            setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.bash")
-            shell = "bash"
-            if not os.path.exists(setup):
-                setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
-                shell = "zsh"
-                
-            cmd = (f"source {setup} && ros2 launch dynamic_obstacle_gz_spawning "
-                   f"multi_obstacle_world.launch.py world_name:={wm.world_name}")
-            subprocess.Popen(["gnome-terminal", "--", shell, "-c", f"{cmd}; exec {shell}"])
-            self.app.status("Launched Gazebo Preview", "success")
+            self.app.launch_preview(use_ros_launch=False)
             
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))

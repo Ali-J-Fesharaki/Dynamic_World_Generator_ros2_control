@@ -130,17 +130,18 @@ class ExportPanel(QWidget):
             QMessageBox.warning(self, "Error", "No world loaded.")
             return
         try:
+            wm.apply_changes()
             from ament_index_python.packages import get_package_share_directory
-            import subprocess, yaml
+            import yaml
             # Quick export
             cfg = os.path.join(get_package_share_directory("dynamic_obstacle_gz_spawning"),
                                "config", "obstacles.yaml")
             self._do_export(cfg)
-            setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
-            cmd = (f"source {setup} && ros2 launch dynamic_obstacle_gz_spawning "
-                   f"multi_obstacle_world.launch.py world_name:={wm.world_name}")
-            subprocess.Popen(["gnome-terminal", "--", "zsh", "-c", f"{cmd}; exec zsh"])
-            self.app.status("Launched Gazebo", "success")
+            
+            has_dynamic = any("motion" in m.get("properties", {}) for m in wm.models if m["type"] in ("box","cylinder","sphere") and m.get("status") != "removed")
+            
+            self.app.launch_preview(use_ros_launch=has_dynamic)
+            
         except Exception as exc:
             QMessageBox.critical(self, "Error", str(exc))
 
@@ -156,6 +157,8 @@ class ExportPanel(QWidget):
         obs = []
         for m in wm.models:
             if m.get("status") == "removed" or m["type"] not in ("box", "cylinder", "sphere"):
+                continue
+            if "motion" not in m.get("properties", {}):
                 continue
             o = {"name": m["name"], "type": m["type"],
                  "color": m["properties"].get("color", "gray").lower(),
