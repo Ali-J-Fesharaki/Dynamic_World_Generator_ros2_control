@@ -50,6 +50,24 @@ class AppState(QObject):
             import psutil
             from utils.config import PROJECT_ROOT
             
+            # Check if Isaac Sim is selected
+            if getattr(self.world_manager, "sim_type", "gazebo") == "isaacsim":
+                try:
+                    setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
+                    if not os.path.exists(setup):
+                        setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.bash")
+                    shell = "zsh" if "zsh" in setup else "bash"
+                    
+                    subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
+                    subprocess.run(["pkill", "-9", "-f", "people.py"], stderr=subprocess.DEVNULL)
+                    
+                    cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_isaacsim_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
+                    self.preview_process = subprocess.Popen([shell, "-c", cmd])
+                    self.status("Launched Isaac Sim via ROS2", "success")
+                except Exception as e:
+                    self.status(f"Launch failed: {str(e)}", "error")
+                return
+
             # Check if Gazebo is running
             gz_running = False
             for proc in psutil.process_iter(['name', 'cmdline']):
@@ -131,3 +149,4 @@ class AppState(QObject):
         subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
         subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
         subprocess.run(["pkill", "-9", "-f", "parameter_bridge"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "-f", "people.py"], stderr=subprocess.DEVNULL)

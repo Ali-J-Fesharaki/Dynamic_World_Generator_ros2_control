@@ -90,7 +90,8 @@ class ObstaclesPanel(QWidget):
         self.box_btn = _Toggle("📦 Box","box"); self.box_btn.setFixedHeight(44)
         self.cyl_btn = _Toggle("⬤ Cyl","cylinder"); self.cyl_btn.setFixedHeight(44)
         self.sph_btn = _Toggle("⚪ Sph","sphere"); self.sph_btn.setFixedHeight(44)
-        for b in (self.box_btn, self.cyl_btn, self.sph_btn):
+        self.prs_btn = _Toggle("🚶 Prs", "person"); self.prs_btn.setFixedHeight(44)
+        for b in (self.box_btn, self.cyl_btn, self.sph_btn, self.prs_btn):
             self.type_group.addButton(b); tr.addWidget(b)
         self.box_btn.setChecked(True)
         lv.addLayout(tr)
@@ -211,7 +212,7 @@ class ObstaclesPanel(QWidget):
         refresh_canvas(self.app)
         self._preview_item = None
         for m in wm.models:
-            if m.get("status")!="removed" and m["type"] in ("box","cylinder","sphere"):
+            if m.get("status")!="removed" and m["type"] in ("box","cylinder","sphere", "person"):
                 self.obs_list.addItem(m["name"])
 
     def _s(self, m, k="info"): self.app.status(m, k)
@@ -220,7 +221,7 @@ class ObstaclesPanel(QWidget):
     # ── Type toggle ────────────────────────────────────────────
     def _type_changed(self, btn=None):
         if btn and isinstance(btn, QPushButton):
-            for b in (self.box_btn, self.cyl_btn, self.sph_btn):
+            for b in (self.box_btn, self.cyl_btn, self.sph_btn, self.prs_btn):
                 if b != btn and b.isChecked():
                     b.setChecked(False)
             c = btn
@@ -230,8 +231,9 @@ class ObstaclesPanel(QWidget):
         t = c.type_id
         for w in (self.w_spin, self.w_lbl): w.setEnabled(t=="box")
         for w in (self.l_spin, self.l_lbl): w.setEnabled(t=="box")
-        for w in (self.h_spin, self.h_lbl): w.setEnabled(t!="sphere")
-        for w in (self.r_spin, self.r_lbl): w.setEnabled(t!="box")
+        for w in (self.h_spin, self.h_lbl): w.setEnabled(t!="sphere" and t!="person")
+        for w in (self.r_spin, self.r_lbl): w.setEnabled(t!="box" and t!="person")
+        self.color_picker.setEnabled(t!="person")
 
     # ── Place ──────────────────────────────────────────────────
     def _start_place(self):
@@ -250,8 +252,11 @@ class ObstaclesPanel(QWidget):
             pz = sz[2]/2
         elif t=="cylinder":
             sz = (self.r_spin.value(), self.h_spin.value()); pz = sz[1]/2
-        else:
+        elif t=="sphere":
             sz = (self.r_spin.value(),); pz = sz[0]
+        else: # person
+            sz = (1.0,)
+            pz = 0
         name = f"{t}_{len(wm.models)+1}"
         if self._preview_item:
             try:
@@ -414,6 +419,9 @@ class ObstaclesPanel(QWidget):
                 w, l = self.w_spin.value() * 100, self.l_spin.value() * 100
                 hw, hl = w/2, l/2
                 self._preview_item = QGraphicsRectItem(QRectF(pt.x() - hw, pt.y() - hl, w, l))
+            elif t == "person":
+                r = 25
+                self._preview_item = QGraphicsEllipseItem(QRectF(pt.x() - r, pt.y() - r, 2*r, 2*r))
             else:
                 r = self.r_spin.value() * 100
                 self._preview_item = QGraphicsEllipseItem(QRectF(pt.x() - r, pt.y() - r, 2*r, 2*r))
@@ -525,12 +533,13 @@ class ObstaclesPanel(QWidget):
         wm = self.app.world_manager
         if not wm: QMessageBox.warning(self,"Error","No world loaded."); return
         for m in wm.models:
-            if m["type"] in ("box","cylinder","sphere"): m["external_spawn"]=True
+            if m["type"] in ("box","cylinder","sphere", "person"): m["external_spawn"]=True
         try:
             wm.apply_changes()
             
-            src_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
-            install_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "dynamic_obstacle_gz_spawning", "share", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+            pkg_name = "dynamic_obstacle_isaacsim_spawning" if wm.sim_type == "isaacsim" else "dynamic_obstacle_gz_spawning"
+            src_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", pkg_name, "config", "obstacles.yaml")
+            install_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", pkg_name, "share", pkg_name, "config", "obstacles.yaml")
             
             os.makedirs(os.path.dirname(src_cfg), exist_ok=True)
             self._export(src_cfg)
@@ -540,7 +549,7 @@ class ObstaclesPanel(QWidget):
             
             self._refresh()
             
-            has_dynamic = any("motion" in m.get("properties", {}) for m in wm.models if m["type"] in ("box","cylinder","sphere") and m.get("status") != "removed")
+            has_dynamic = any(("motion" in m.get("properties", {}) or m["type"] == "person") for m in wm.models if m["type"] in ("box","cylinder","sphere", "person") and m.get("status") != "removed")
             
             self.app.launch_preview(use_ros_launch=has_dynamic)
             
@@ -552,17 +561,19 @@ class ObstaclesPanel(QWidget):
         if not wm: QMessageBox.warning(self,"Error","No world loaded."); return
         obs = []
         for m in wm.models:
-            if m.get("status")=="removed" or m["type"]=="wall" or m["type"] not in ("box","cylinder","sphere"):
+            if m.get("status")=="removed" or m["type"]=="wall" or m["type"] not in ("box","cylinder","sphere","person"):
                 continue
-            if "motion" not in m.get("properties", {}):
+            if "motion" not in m.get("properties", {}) and m["type"] != "person":
                 continue
-            o = {"name":m["name"],"type":m["type"],"color":m["properties"].get("color","gray").lower(),
+            
+            color_val = m["properties"].get("color","gray").lower() if m["type"] != "person" else "none"
+            o = {"name":m["name"],"type":m["type"],"color":color_val,
                  "enabled":True,"x_pose":float(m["properties"]["position"][0]),
                  "y_pose":float(m["properties"]["position"][1]),
-                 "z_pose":float(m["properties"]["position"][2]),"size":list(m["properties"]["size"])}
+                 "z_pose":float(m["properties"]["position"][2]),"size":list(m["properties"].get("size",[1,1,1]))}
             if "motion" in m["properties"]:
                 mt = m["properties"]["motion"]
-                o["motion"] = {"type":mt["type"],"velocity":float(mt["velocity"]),"std":float(mt["std"])}
+                o["motion"] = {"type":mt["type"],"velocity":float(mt.get("velocity", 1.0)),"std":float(mt.get("std", 0.0))}
                 if "path" in mt:
                     o["motion"]["path"] = [[p[0]-float(m["properties"]["position"][0]),
                                             p[1]-float(m["properties"]["position"][1])] for p in mt["path"]]
@@ -574,7 +585,8 @@ class ObstaclesPanel(QWidget):
         data = {"obstacles":obs}
         if path is None:
             if not path:
-                path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+                pkg_name = "dynamic_obstacle_isaacsim_spawning" if wm.sim_type == "isaacsim" else "dynamic_obstacle_gz_spawning"
+                path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", pkg_name, "config", "obstacles.yaml")
             else: return
         try:
             os.makedirs(os.path.dirname(path), exist_ok=True)

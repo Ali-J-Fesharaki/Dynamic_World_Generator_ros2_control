@@ -5,6 +5,7 @@ class WorldManager:
     def __init__(self, simulation, version):
         # Initialize world manager with simulation and version
         self.simulation = simulation
+        self.sim_type = simulation
         self.version = version
         self.world_name = None
         self.world_path = None
@@ -123,6 +124,9 @@ class WorldManager:
                     dif.text = f"{r} {g} {b} 1"
 
     def sync_static_models_to_running_gazebo(self):
+        if self.sim_type == "isaacsim":
+            return
+            
         import xml.etree.ElementTree as ET
         import subprocess
         import os
@@ -197,6 +201,49 @@ class WorldManager:
         if not self.world_name:
             return
             
+        if self.sim_type == "isaacsim":
+            from classes.usd_exporter import export_to_usda
+            import yaml
+            
+            export_path = os.path.join(PROJECT_ROOT, "worlds", "isaacsim", f"{self.world_name}.usd")
+            os.makedirs(os.path.dirname(export_path), exist_ok=True)
+            export_to_usda(self.models, export_path)
+            
+            # Export obstacles.yaml for isaac sim spawning script
+            data = {"obstacles": []}
+            for m in self.models:
+                if m.get("status")=="removed" or m["type"]=="wall" or m["type"] not in ("box","cylinder","sphere", "person"):
+                    continue
+                if "motion" not in m.get("properties", {}) and m["type"] != "person":
+                    continue
+                
+                # Person doesn't use color
+                color_val = m["properties"].get("color","gray").lower() if m["type"] != "person" else "none"
+                
+                o = {"name":m["name"],"type":m["type"],"color":color_val,
+                     "enabled":True,"x_pose":float(m["properties"]["position"][0]),
+                     "y_pose":float(m["properties"]["position"][1]),
+                     "z_pose":float(m["properties"]["position"][2]),
+                     "size":list(m["properties"].get("size", [1,1,1]))}
+                if "motion" in m["properties"]:
+                    mt = m["properties"]["motion"]
+                    o["motion"] = {"type":mt["type"],"velocity":float(mt.get("velocity", 1.0)),"std":float(mt.get("std", 0.0))}
+                    if "path" in mt:
+                        o["motion"]["path"] = [[p[0]-float(m["properties"]["position"][0]),
+                                                p[1]-float(m["properties"]["position"][1])] for p in mt["path"]]
+                    if mt["type"]=="elliptical":
+                        o["motion"]["semi_major"]=float(mt["semi_major"])
+                        o["motion"]["semi_minor"]=float(mt["semi_minor"])
+                        o["motion"]["angle"]=float(mt["angle"])
+                data["obstacles"].append(o)
+                
+            obs_yaml_path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", 
+                                         "dynamic_obstacle_isaacsim_spawning", "config", "obstacles.yaml")
+            os.makedirs(os.path.dirname(obs_yaml_path), exist_ok=True)
+            with open(obs_yaml_path, "w") as f:
+                yaml.dump(data, f, sort_keys=False)
+            return
+
         import shutil
         from xml.etree import ElementTree as ET
         

@@ -149,7 +149,8 @@ class SetupPanel(QWidget):
 
         self.isaac_card = SimCard("isaac", "Isaac Sim",
             os.path.join(INTRO_IMAGES_DIR, "isaacsim_450_gray.png"),
-            ["○ NVIDIA Omniverse", "○ AI training", "○ Digital twins"], enabled=False)
+            ["○ NVIDIA Omniverse", "○ AI training", "○ Digital twins"], enabled=True)
+        self.isaac_card.clicked.connect(lambda: self._select_sim("isaacsim"))
 
         cards.addWidget(self.harmonic_card)
         cards.addWidget(self.fortress_card)
@@ -203,7 +204,11 @@ class SetupPanel(QWidget):
     def _select_sim(self, version):
         self.harmonic_card.selected = (version == "harmonic")
         self.fortress_card.selected = (version == "fortress")
-        self.app.set_simulation("gazebo", version)
+        self.isaac_card.selected = (version == "isaacsim")
+        if version == "isaacsim":
+            self.app.set_simulation("isaacsim", "5.1")
+        else:
+            self.app.set_simulation("gazebo", version)
 
     def _create_world(self):
         wm = self.app.world_manager
@@ -215,23 +220,37 @@ class SetupPanel(QWidget):
             QMessageBox.warning(self, "Error", "Enter a world name.")
             return
         try:
-            empty = os.path.join(WORLDS_GAZEBO_DIR, wm.version, "empty_world.sdf")
-            if not os.path.exists(empty):
-                raise FileNotFoundError(f"Template not found: {empty}")
-            dst_src = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src',
-                               'dynamic_obstacle_gz_spawning', 'worlds', f"{name}.sdf")
-            shutil.copyfile(empty, dst_src)
-            tree = ET.parse(dst_src)
-            we = tree.getroot().find("world")
-            if we is not None:
-                we.set("name", name)
-            tree.write(dst_src, encoding="utf-8", xml_declaration=True)
-            
-            dst_install = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'install',
-                               'dynamic_obstacle_gz_spawning', 'share',
-                               'dynamic_obstacle_gz_spawning', 'worlds', f"{name}.sdf")
-            os.makedirs(os.path.dirname(dst_install), exist_ok=True)
-            shutil.copyfile(dst_src, dst_install)
+            if wm.sim_type == "gazebo":
+                empty = os.path.join(WORLDS_GAZEBO_DIR, wm.version, "empty_world.sdf")
+                if not os.path.exists(empty):
+                    raise FileNotFoundError(f"Template not found: {empty}")
+                dst_src = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'src',
+                                   'dynamic_obstacle_gz_spawning', 'worlds', f"{name}.sdf")
+                shutil.copyfile(empty, dst_src)
+                tree = ET.parse(dst_src)
+                we = tree.getroot().find("world")
+                if we is not None:
+                    we.set("name", name)
+                tree.write(dst_src, encoding="utf-8", xml_declaration=True)
+
+                dst_install = os.path.join(PROJECT_ROOT, 'code', 'control_ws', 'install',
+                                   'dynamic_obstacle_gz_spawning', 'share',
+                                   'dynamic_obstacle_gz_spawning', 'worlds', f"{name}.sdf")
+                os.makedirs(os.path.dirname(dst_install), exist_ok=True)
+                shutil.copyfile(dst_src, dst_install)
+            elif wm.sim_type == "isaacsim":
+                from utils.config import PROJECT_ROOT
+                empty = os.path.join(PROJECT_ROOT, "worlds", "isaacsim", wm.version, "empty_world.usd")
+                if not os.path.exists(empty):
+                    # fallback
+                    empty = os.path.join(PROJECT_ROOT, "worlds", "isaacsim", "empty_world.usd")
+                if not os.path.exists(empty):
+                    raise FileNotFoundError(f"Template not found: {empty}")
+                # We only need to create an empty world file in the project worlds directory for now.
+                # Isaac Sim spawning script loads the empty template directly.
+                dst_src = os.path.join(PROJECT_ROOT, 'worlds', 'isaacsim', f"{name}.usd")
+                os.makedirs(os.path.dirname(dst_src), exist_ok=True)
+                shutil.copyfile(empty, dst_src)
             
             wm.load_world(name)
             self.info_label.setText(f"✓  Created and loaded world: {name}")

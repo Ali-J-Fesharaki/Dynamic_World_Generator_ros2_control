@@ -204,23 +204,31 @@ def refresh_canvas(app):
             scene.addItem(txt)
             app.wall_items[model["name"]] = (line, txt)
 
-        elif model["type"] in ("box", "cylinder", "sphere"):
+        elif model["type"] in ("box", "cylinder", "sphere", "person"):
             pos = model["properties"]["position"]
-            sz = model["properties"]["size"]
+            sz = model["properties"]["size"] if model["type"] != "person" else [1,1,1]
             ctr = QPointF(pos[0] * 100, -pos[1] * 100)
             if model["type"] == "box":
                 W, L, _ = sz
                 hw = round((W / 2) * 100 / 10) * 10
                 hl = round((L / 2) * 100 / 10) * 10
                 it = QGraphicsRectItem(QRectF(ctr.x() - hw, ctr.y() - hl, 2 * hw, 2 * hl))
+            elif model["type"] == "person":
+                R = 0.25
+                rp = R * 100
+                it = QGraphicsEllipseItem(
+                    QRectF(ctr.x() - rp, ctr.y() - rp, 2 * rp, 2 * rp))
             else:
                 R = sz[0]
                 rp = R * 100
                 it = QGraphicsEllipseItem(
                     QRectF(ctr.x() - rp, ctr.y() - rp, 2 * rp, 2 * rp))
             it.setPen(QPen(QColor(Colors.BORDER_LIGHT), 2))
-            rgb = get_color(model["properties"]["color"])
-            it.setBrush(QColor.fromRgbF(*rgb))
+            if model["type"] == "person":
+                it.setBrush(QColor(Colors.PRIMARY))
+            else:
+                rgb = get_color(model["properties"]["color"])
+                it.setBrush(QColor.fromRgbF(*rgb))
             scene.addItem(it)
             txt = QGraphicsTextItem(model["name"])
             txt.setDefaultTextColor(QColor(Colors.TEXT_PRIMARY))
