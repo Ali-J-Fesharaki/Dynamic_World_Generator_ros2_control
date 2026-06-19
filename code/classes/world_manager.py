@@ -123,78 +123,73 @@ class WorldManager:
                     dif.text = f"{r} {g} {b} 1"
 
     def sync_static_models_to_running_gazebo(self):
-        import threading
+        import xml.etree.ElementTree as ET
+        import subprocess
+        import os
+        import tempfile
+        import shutil
+        import hashlib
+        import json
         
-        def sync_task():
-            import xml.etree.ElementTree as ET
-            import subprocess
-            import os
-            import tempfile
-            import shutil
-            import hashlib
-            import json
+        if shutil.which("ign"):
+            cmd_prefix = "ign"
+            msg_prefix = "ign_msgs"
+        else:
+            cmd_prefix = "gz"
+            msg_prefix = "gz.msgs"
             
-            if shutil.which("ign"):
-                cmd_prefix = "ign"
-                msg_prefix = "ign_msgs"
-            else:
-                cmd_prefix = "gz"
-                msg_prefix = "gz.msgs"
+        world = self.world_name if self.world_name else "multi_obstacle_world"
+        temp_dir = tempfile.gettempdir()
+        
+        to_remove = []
+        to_create = []
+        
+        for m in self.models:
+            is_dynamic = m["type"] in ("box", "cylinder", "sphere") and "motion" in m.get("properties", {})
                 
-            world = self.world_name if self.world_name else "multi_obstacle_world"
-            temp_dir = tempfile.gettempdir()
+            name = m["name"]
+            status = m.get("status")
             
-            to_remove = []
-            to_create = []
-            
-            for m in self.models:
-                # Is it a dynamic obstacle? Skip
-                if m["type"] in ("box", "cylinder", "sphere") and "motion" in m.get("properties", {}):
-                    continue
-                    
-                name = m["name"]
-                status = m.get("status")
-                
-                if status == "removed":
-                    if name not in self._already_removed_models:
-                        to_remove.append(name)
-                        self._already_removed_models.add(name)
-                    if name in self._synced_models_hash:
-                        del self._synced_models_hash[name]
-                    continue
-                
-                prop_str = json.dumps(m.get("properties", {}), sort_keys=True)
-                m_hash = hashlib.md5(prop_str.encode()).hexdigest()
-                
-                if name not in self._synced_models_hash:
-                    to_create.append(m)
-                    self._synced_models_hash[name] = m_hash
-                elif self._synced_models_hash[name] != m_hash:
+            if status == "removed":
+                if name not in self._already_removed_models:
                     to_remove.append(name)
+                    self._already_removed_models.add(name)
+                if name in self._synced_models_hash:
+                    del self._synced_models_hash[name]
+                continue
+            
+            prop_str = json.dumps(m.get("properties", {}), sort_keys=True)
+            m_hash = hashlib.md5(prop_str.encode()).hexdigest()
+            
+            if name not in self._synced_models_hash:
+                if not is_dynamic:
                     to_create.append(m)
-                    self._synced_models_hash[name] = m_hash
-                    
-            for name in to_remove:
-                cmd = [cmd_prefix, "service", "-s", f"/world/{world}/remove",
-                       "--reqtype", f"{msg_prefix}.Entity", "--reptype", f"{msg_prefix}.Boolean",
-                       "--timeout", "1000", "--req", f"name: '{name}' type: MODEL"]
-                subprocess.run(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+                self._synced_models_hash[name] = m_hash
+            elif self._synced_models_hash[name] != m_hash:
+                to_remove.append(name)
+                if not is_dynamic:
+                    to_create.append(m)
+                self._synced_models_hash[name] = m_hash
                 
-            for m in to_create:
-                sdf_root = ET.Element("sdf", version="1.6")
-                self._add_model_to_elem(m, sdf_root)
-                sdf_str = ET.tostring(sdf_root, encoding="unicode")
+        for name in to_remove:
+            cmd = [cmd_prefix, "service", "-s", f"/world/{world}/remove",
+                   "--reqtype", f"{msg_prefix}.Entity", "--reptype", f"{msg_prefix}.Boolean",
+                   "--timeout", "1000", "--req", f"name: '{name}' type: MODEL"]
+            subprocess.run(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+            
+        for m in to_create:
+            sdf_root = ET.Element("sdf", version="1.6")
+            self._add_model_to_elem(m, sdf_root)
+            sdf_str = ET.tostring(sdf_root, encoding="unicode")
+            
+            temp_sdf = os.path.join(temp_dir, f"{m['name']}.sdf")
+            with open(temp_sdf, "w") as f:
+                f.write(sdf_str)
                 
-                temp_sdf = os.path.join(temp_dir, f"{m['name']}.sdf")
-                with open(temp_sdf, "w") as f:
-                    f.write(sdf_str)
-                    
-                cmd = [cmd_prefix, "service", "-s", f"/world/{world}/create",
-                       "--reqtype", f"{msg_prefix}.EntityFactory", "--reptype", f"{msg_prefix}.Boolean",
-                       "--timeout", "2000", "--req", f"sdf_filename: '{temp_sdf}' name: '{m['name']}'"]
-                subprocess.run(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
-
-        threading.Thread(target=sync_task, daemon=True).start()
+            cmd = [cmd_prefix, "service", "-s", f"/world/{world}/create",
+                   "--reqtype", f"{msg_prefix}.EntityFactory", "--reptype", f"{msg_prefix}.Boolean",
+                   "--timeout", "2000", "--req", f"sdf_filename: '{temp_sdf}' name: '{m['name']}'"]
+            subprocess.run(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
     def apply_changes(self):
         # We write walls directly to the .sdf file.

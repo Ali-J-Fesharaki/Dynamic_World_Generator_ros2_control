@@ -63,53 +63,48 @@ class AppState(QObject):
                 except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                     pass
     
-            if not use_ros_launch and gz_running:
+            if gz_running:
+                # Sync models. This handles creating static models and removing ALL old models (including dynamic).
                 self.world_manager.sync_static_models_to_running_gazebo()
-                self.status("Synced static models to Gazebo", "success")
-                return True
-    
-            # Kill existing process if running
-            if self.preview_process is not None:
-                try:
-                    self.preview_process.terminate()
-                    self.preview_process.wait(timeout=2)
-                except:
-                    try:
-                        self.preview_process.kill()
-                    except:
-                        pass
-                self.preview_process = None
-    
-            # Forcefully kill any lingering Gazebo processes to ensure world reloads
-            subprocess.run(["pkill", "-9", "-f", "ign gazebo"], stderr=subprocess.DEVNULL)
-            subprocess.run(["pkill", "-9", "-f", "gz sim"], stderr=subprocess.DEVNULL)
-            subprocess.run(["pkill", "-9", "ruby"], stderr=subprocess.DEVNULL)
-            subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
-            subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
-            subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
-            subprocess.run(["pkill", "-9", "-f", "parameter_bridge"], stderr=subprocess.DEVNULL)
+                
+                if not use_ros_launch:
+                    self.status("Synced static models to Gazebo", "success")
+                    return True
+                else:
+                    # We need to restart ROS2 nodes for dynamic obstacles, but we KEEP Gazebo running!
+                    subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
+                    subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
+                    subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
+                    subprocess.run(["pkill", "-9", "-f", "parameter_bridge"], stderr=subprocess.DEVNULL)
+            else:
+                if not use_ros_launch:
+                    # Starting just Gazebo for static preview
+                    pass
+                # Forcefully kill any lingering Gazebo/ROS processes to ensure clean start
+                subprocess.run(["pkill", "-9", "-f", "ign gazebo"], stderr=subprocess.DEVNULL)
+                subprocess.run(["pkill", "-9", "-f", "gz sim"], stderr=subprocess.DEVNULL)
+                subprocess.run(["pkill", "-9", "ruby"], stderr=subprocess.DEVNULL)
+                subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
+                subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
+                subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
+                subprocess.run(["pkill", "-9", "-f", "parameter_bridge"], stderr=subprocess.DEVNULL)
     
             try:
-                if use_ros_launch:
-                    setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
-                    if not os.path.exists(setup):
-                        setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.bash")
-                    shell = "zsh" if "zsh" in setup else "bash"
+                setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
+                if not os.path.exists(setup):
+                    setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.bash")
+                shell = "zsh" if "zsh" in setup else "bash"
+                
+                if gz_running and use_ros_launch:
+                    # Gazebo is already running, just spawn the dynamic obstacles using ros2 launch
                     cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_gz_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
                     self.preview_process = subprocess.Popen([shell, "-c", cmd])
                     self.status("Launched ROS2 spawner", "success")
-                else:
-                    sdf_path = os.path.join(PROJECT_ROOT, "code", "control_ws", "install",
-                                            "dynamic_obstacle_gz_spawning", "share",
-                                            "dynamic_obstacle_gz_spawning", "worlds", f"{self.world_manager.world_name}.sdf")
-                    
-                    if self.world_manager.version == "harmonic":
-                        cmd = ["gz", "sim", sdf_path]
-                    else:
-                        cmd = ["ign", "gazebo", sdf_path]
-                        
-                    self.preview_process = subprocess.Popen(cmd)
-                    self.status("Launched Gazebo Preview", "success")
+                elif not gz_running:
+                    # Gazebo is NOT running, ALWAYS launch via ros2 launch to ensure all plugins load!
+                    cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_gz_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
+                    self.preview_process = subprocess.Popen([shell, "-c", cmd])
+                    self.status("Launched Gazebo via ROS2", "success")
                     
             except Exception as e:
                 self.status(f"Launch failed: {str(e)}", "error")
@@ -119,6 +114,7 @@ class AppState(QObject):
         return True
 
     def cleanup(self):
+        import subprocess
         if self.world_manager:
             self.world_manager.cleanup()
         if self.preview_process:
@@ -127,3 +123,11 @@ class AppState(QObject):
             except:
                 pass
             self.preview_process = None
+            
+        subprocess.run(["pkill", "-9", "-f", "ign gazebo"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "-f", "gz sim"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "ruby"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
+        subprocess.run(["pkill", "-9", "-f", "parameter_bridge"], stderr=subprocess.DEVNULL)

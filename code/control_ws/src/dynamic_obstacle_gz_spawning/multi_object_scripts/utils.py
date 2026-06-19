@@ -523,13 +523,19 @@ def generate_ros2_control_plugin(
     if sim_version == "fortress":
         param_tag = f"<parameters>{controllers_config_path}</parameters>"
         control_name = f"{obstacle_name}_controller"
+        hw_plugin = "ign_ros2_control/IgnitionSystem"
+        gz_plugin_filename = "ign_ros2_control-system"
+        gz_plugin_name = "ign_ros2_control::IgnitionROS2ControlPlugin"
     else:  # harmonic
         param_tag = f"<parameters>{controllers_config_path}</parameters>"
         control_name = f"{obstacle_name}_control"
+        hw_plugin = "gz_ros2_control/GazeboSimSystem"
+        gz_plugin_filename = "gz_ros2_control-system"
+        gz_plugin_name = "gz_ros2_control::GazeboSimROS2ControlPlugin"
     
     return f'''      <ros2_control name="{obstacle_name}" type="system">
     <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <plugin>{hw_plugin}</plugin>
       </hardware>
       <joint name="{joint_x}">
         <command_interface name="position"/>
@@ -548,7 +554,7 @@ def generate_ros2_control_plugin(
       </joint>
     </ros2_control>
     <gazebo>
-    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+    <plugin filename="{gz_plugin_filename}" name="{gz_plugin_name}">
       <ros>
         <namespace>$(arg namespace)</namespace>
         <remapping>/tf:=tf</remapping>
