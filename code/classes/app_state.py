@@ -65,7 +65,7 @@ class AppState(QObject):
                     subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
                     subprocess.run(["pkill", "-9", "-f", "people.py"], stderr=subprocess.DEVNULL)
                     
-                    cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_isaacsim_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
+                    cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_isaacsim_spawning isaacsim_obstacle_spawner.launch.py world_name:={self.world_manager.world_name}"
                     self.preview_process = subprocess.Popen([shell, "-c", cmd])
                     self.status("Launched Isaac Sim via ROS2", "success")
                 except Exception as e:
