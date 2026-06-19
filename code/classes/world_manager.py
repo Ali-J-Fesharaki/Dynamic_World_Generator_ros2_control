@@ -230,6 +230,36 @@ class WorldManager:
             os.makedirs(os.path.dirname(install_path), exist_ok=True)
             shutil.copyfile(src_path, install_path)
             
+            # 5. Export obstacles.yaml
+            import yaml
+            data = {"obstacles": []}
+            for m in self.models:
+                if m.get("status")=="removed" or m["type"]=="wall" or m["type"] not in ("box","cylinder","sphere"):
+                    continue
+                if "motion" not in m.get("properties", {}):
+                    continue
+                o = {"name":m["name"],"type":m["type"],"color":m["properties"].get("color","gray").lower(),
+                     "enabled":True,"x_pose":float(m["properties"]["position"][0]),
+                     "y_pose":float(m["properties"]["position"][1]),
+                     "z_pose":float(m["properties"]["position"][2]),"size":list(m["properties"]["size"])}
+                if "motion" in m["properties"]:
+                    mt = m["properties"]["motion"]
+                    o["motion"] = {"type":mt["type"],"velocity":float(mt["velocity"]),"std":float(mt["std"])}
+                    if "path" in mt:
+                        o["motion"]["path"] = [[p[0]-float(m["properties"]["position"][0]),
+                                                p[1]-float(m["properties"]["position"][1])] for p in mt["path"]]
+                    if mt["type"]=="elliptical":
+                        o["motion"]["semi_major"]=float(mt["semi_major"])
+                        o["motion"]["semi_minor"]=float(mt["semi_minor"])
+                        o["motion"]["angle"]=float(mt["angle"])
+                data["obstacles"].append(o)
+                
+            obs_yaml_path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", 
+                                         "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+            os.makedirs(os.path.dirname(obs_yaml_path), exist_ok=True)
+            with open(obs_yaml_path, "w") as f:
+                yaml.dump(data, f, sort_keys=False)
+            
         except Exception as e:
             print(f"Error applying SDF changes: {e}")
 

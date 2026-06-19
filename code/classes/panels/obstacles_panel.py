@@ -21,6 +21,7 @@ class _Toggle(QPushButton):
         self.type_id = tid
         self.accent = accent or Colors.PRIMARY
         self.setCheckable(True); self.setCursor(Qt.PointingHandCursor)
+        self.toggled.connect(lambda _: self._rs())
         self._rs()
     def _rs(self):
         if self.isChecked():
@@ -35,8 +36,6 @@ class _Toggle(QPushButton):
                 f"QPushButton:hover{{background:{Colors.BG_ELEVATED};}}")
     def nextCheckState(self):
         if not self.isChecked(): self.setChecked(True)
-    def setChecked(self, c):
-        super().setChecked(c); self._rs()
 
 
 def _spin(label, lo, hi, val, step, sfx, dec=2, w=45, tip=""):
@@ -88,11 +87,12 @@ class ObstaclesPanel(QWidget):
 
         tr = QHBoxLayout(); tr.setSpacing(Dims.SPACING_SM)
         self.type_group = QButtonGroup(self); self.type_group.setExclusive(True)
-        self.box_btn = _Toggle("📦 Box","box"); self.box_btn.setChecked(True); self.box_btn.setFixedHeight(44)
+        self.box_btn = _Toggle("📦 Box","box"); self.box_btn.setFixedHeight(44)
         self.cyl_btn = _Toggle("⬤ Cyl","cylinder"); self.cyl_btn.setFixedHeight(44)
         self.sph_btn = _Toggle("⚪ Sph","sphere"); self.sph_btn.setFixedHeight(44)
         for b in (self.box_btn, self.cyl_btn, self.sph_btn):
             self.type_group.addButton(b); tr.addWidget(b)
+        self.box_btn.setChecked(True)
         lv.addLayout(tr)
         self.type_group.buttonClicked.connect(self._type_changed)
 
@@ -136,11 +136,12 @@ class ObstaclesPanel(QWidget):
 
         mr = QHBoxLayout(); mr.setSpacing(Dims.SPACING_SM)
         self.mg = QButtonGroup(self); self.mg.setExclusive(True)
-        self.lin_btn = _Toggle("⟷ Linear","linear","#FF6B6B"); self.lin_btn.setChecked(True); self.lin_btn.setFixedHeight(32)
+        self.lin_btn = _Toggle("⟷ Linear","linear","#FF6B6B"); self.lin_btn.setFixedHeight(32)
         self.ell_btn = _Toggle("⬮ Ellip","elliptical","#51CF66"); self.ell_btn.setFixedHeight(32)
         self.pol_btn = _Toggle("⬡ Poly","polygon","#339AF0"); self.pol_btn.setFixedHeight(32)
         for b in (self.lin_btn, self.ell_btn, self.pol_btn):
             self.mg.addButton(b); mr.addWidget(b)
+        self.lin_btn.setChecked(True)
         mb.addLayout(mr)
         self.mg.buttonClicked.connect(self._motion_changed)
 
@@ -208,6 +209,7 @@ class ObstaclesPanel(QWidget):
         if not wm: return
         from classes.main_window import refresh_canvas
         refresh_canvas(self.app)
+        self._preview_item = None
         for m in wm.models:
             if m.get("status")!="removed" and m["type"] in ("box","cylinder","sphere"):
                 self.obs_list.addItem(m["name"])
@@ -216,9 +218,15 @@ class ObstaclesPanel(QWidget):
     def snap(self, p, sp=10): return QPointF(round(p.x()/sp)*sp, round(p.y()/sp)*sp)
 
     # ── Type toggle ────────────────────────────────────────────
-    def _type_changed(self, _=None):
-        c = self.type_group.checkedButton()
-        if not c: return
+    def _type_changed(self, btn=None):
+        if btn and isinstance(btn, QPushButton):
+            for b in (self.box_btn, self.cyl_btn, self.sph_btn):
+                if b != btn and b.isChecked():
+                    b.setChecked(False)
+            c = btn
+        else:
+            c = self.type_group.checkedButton()
+        if getattr(c, "type_id", None) is None: return
         t = c.type_id
         for w in (self.w_spin, self.w_lbl): w.setEnabled(t=="box")
         for w in (self.l_spin, self.l_lbl): w.setEnabled(t=="box")
@@ -246,7 +254,10 @@ class ObstaclesPanel(QWidget):
             sz = (self.r_spin.value(),); pz = sz[0]
         name = f"{t}_{len(wm.models)+1}"
         if self._preview_item:
-            self.app.scene.removeItem(self._preview_item)
+            try:
+                self.app.scene.removeItem(self._preview_item)
+            except RuntimeError:
+                pass
             self._preview_item = None
             
         wm.add_model({"name":name,"type":t,"properties":{
@@ -304,13 +315,20 @@ class ObstaclesPanel(QWidget):
             self._clear_gfx(); self.points = []
             self.vel_spin.setValue(1); self.std_spin.setValue(.1)
             self.maj_spin.setValue(2); self.min_spin.setValue(1)
+            self.lin_btn.setChecked(True); self._motion_changed()
             self.instr.setText("No motion — click 'Start Path'")
         self._s(f"Selected: {self.current_obstacle}", "info")
 
     # ── Motion type ────────────────────────────────────────────
-    def _motion_changed(self, _=None):
-        c = self.mg.checkedButton()
-        if not c: return
+    def _motion_changed(self, btn=None):
+        if btn and isinstance(btn, QPushButton):
+            for b in (self.lin_btn, self.ell_btn, self.pol_btn):
+                if b != btn and b.isChecked():
+                    b.setChecked(False)
+            c = btn
+        else:
+            c = self.mg.checkedButton()
+        if getattr(c, "type_id", None) is None: return
         self.current_motion = c.type_id
         self._clear_gfx(); self.points = []
         ie = self.current_motion=="elliptical"
@@ -386,7 +404,10 @@ class ObstaclesPanel(QWidget):
             brush = QBrush(QColor.fromRgbF(rgb[0], rgb[1], rgb[2], 0.5)) # Semi-transparent
             
             if self._preview_item:
-                self.app.scene.removeItem(self._preview_item)
+                try:
+                    self.app.scene.removeItem(self._preview_item)
+                except RuntimeError:
+                    pass
                 self._preview_item = None
                 
             if t == "box":
@@ -414,20 +435,26 @@ class ObstaclesPanel(QWidget):
             if mt=="linear" and len(self.points)==2:
                 self.click_mode=None; self.view.set_crosshair_mode(False)
                 if self._preview_item:
-                    self.app.scene.removeItem(self._preview_item)
+                    try:
+                        self.app.scene.removeItem(self._preview_item)
+                    except RuntimeError: pass
                     self._preview_item = None
                 self._draw_path(); self._store()
                 self.instr.setText(f"✓ Linear path set")
             elif mt=="elliptical" and len(self.points)==1:
                 self.click_mode=None; self.view.set_crosshair_mode(False)
                 if self._preview_item:
-                    self.app.scene.removeItem(self._preview_item)
+                    try:
+                        self.app.scene.removeItem(self._preview_item)
+                    except RuntimeError: pass
                     self._preview_item = None
                 self._draw_path(); self._store()
                 self.instr.setText(f"✓ Elliptical path set")
             elif mt=="polygon":
                 if self._preview_item:
-                    self.app.scene.removeItem(self._preview_item)
+                    try:
+                        self.app.scene.removeItem(self._preview_item)
+                    except RuntimeError: pass
                     self._preview_item = None
                 self._draw_path()
                 self.instr.setText(f"{len(self.points)} pts — click more or 'Finish'")
