@@ -1,0 +1,2624 @@
+{
+  "description": "CRUX release file manifest with checksums for verification and backup",
+  "releases": {
+    "2.2.0": {
+      "date": "2026-01-29",
+      "commit": "580f17f5682c2a18700aabde7eacf9516ba31dd0",
+      "files": {
+        "CRUX.md": {
+          "checksum": "5bde24faa5697aa825e70703623fdbc4245694fc01d8f1001386f98e6da8a766",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "71f469db17234851fe4d2282b3c8691b711f0cec094fd88c27c7d2b77d49e318",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "5f3ef1a3f0ece8e50e5789a1098d327e84165391b45f58068b453a0888a61502",
+          "size": 390
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "6cec311836697552c5705a3a3f78dabbbdae471d612a36429b139d9584340088",
+          "size": 12587
+        },
+        ".cursor/hooks/detect-crux-changes.sh": {
+          "checksum": "acc1437159037d2c8610106713958c82ace07adf018e692422aa829c0cb41715",
+          "size": 1705
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.2.1": {
+      "date": "2026-01-29",
+      "commit": "fa7467e54a0f4dfa65988053cf1c1d351013dc7f",
+      "files": {
+        "CRUX.md": {
+          "checksum": "49fd32812b1f11518450c56144183d18b57b4e1254132ca0d1f357617b667a8d",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "083cd09be032c924ffad2bf280eb03aaa8b9b7ff40f9388c5253be36b82eaaff",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "5f3ef1a3f0ece8e50e5789a1098d327e84165391b45f58068b453a0888a61502",
+          "size": 390
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "6cec311836697552c5705a3a3f78dabbbdae471d612a36429b139d9584340088",
+          "size": 12587
+        },
+        ".cursor/hooks/detect-crux-changes.sh": {
+          "checksum": "cd50d6df67148b8f377fd24443703587d154e9523599afbb9df98e73faa11665",
+          "size": 1752
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.3.0": {
+      "date": "2026-01-29",
+      "commit": "e1e7e6f314618cae407c0fb7259ff4143c3c3d6b",
+      "files": {
+        "CRUX.md": {
+          "checksum": "a47398fb5fecb9704ab843ba5319624cebd5fc6ecc3eef2695b524129c89502f",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "a692346d89dc7817625bcb253cb7b13d8262a61898eb24e33d427228858f31c0",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "75e54a207d050bf05e18de7de2fc4994395829c8ee7ac1492606e000e509e9ed",
+          "size": 13511
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "087ecf4497250c7b200bc387bc90cb34bc67b96bc2f0bfd3a90d33766aa81f66",
+          "size": 3038
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.3.1": {
+      "date": "2026-01-29",
+      "commit": "b7f6a2fab64c435e749e2469dd4f0bf7696c6b0f",
+      "files": {
+        "CRUX.md": {
+          "checksum": "89461f86016f12c7b3e39b77db34e3f129e9f90a300d84b761b224ff918f0774",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "6f4d17f5657425e524968128f190ffdba9ea7bd95c04139414c1d112a6e00a22",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "75e54a207d050bf05e18de7de2fc4994395829c8ee7ac1492606e000e509e9ed",
+          "size": 13511
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "40ce9142f0805f61ac7a18f38f6ea45df84c722aa8569427604906573452cce7",
+          "size": 3307
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.3.2": {
+      "date": "2026-01-29",
+      "commit": "5512c29314363369665ee5152e1b63e32cc5a62f",
+      "files": {
+        "CRUX.md": {
+          "checksum": "505012d4d514e63a5afc02dd0747260f37543428d4e088435112b12424d473fc",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "8a25a5e928aa9f020b447ffa7572a84371c36162849bb02c850dfcbd4c4c18f5",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "75e54a207d050bf05e18de7de2fc4994395829c8ee7ac1492606e000e509e9ed",
+          "size": 13511
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "40ce9142f0805f61ac7a18f38f6ea45df84c722aa8569427604906573452cce7",
+          "size": 3307
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.3.3": {
+      "date": "2026-01-29",
+      "commit": "e823e864b1cbc10edd0799bb55c1afa5168c864d",
+      "files": {
+        "CRUX.md": {
+          "checksum": "5f9ea69118272c8d9b2139ac5f653c8fa0ec291677cffa8b088883a6ed472053",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "85c294a6a5ee91b66ef3db9ff44ec146a355fa24cdbeb7d32a8a933422febf39",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "75e54a207d050bf05e18de7de2fc4994395829c8ee7ac1492606e000e509e9ed",
+          "size": 13511
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "40ce9142f0805f61ac7a18f38f6ea45df84c722aa8569427604906573452cce7",
+          "size": 3307
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.4.0": {
+      "date": "2026-01-29",
+      "commit": "cbaefc0a0ebc9978014f12a9d6a93ef43c123662",
+      "files": {
+        "CRUX.md": {
+          "checksum": "6b7790d6e1c59bb6740f945ab3894a26d54809a0d4a8b9e86bdf79f4bcea68ed",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "e12a27c6ce89a85aa8575806dbe3a982d3f53f4e41bb7a61df07ec56ca672116",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "75e54a207d050bf05e18de7de2fc4994395829c8ee7ac1492606e000e509e9ed",
+          "size": 13511
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "40ce9142f0805f61ac7a18f38f6ea45df84c722aa8569427604906573452cce7",
+          "size": 3307
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.4.1": {
+      "date": "2026-01-29",
+      "commit": "804c1078410d5d8939abecd138939ee1aca55062",
+      "files": {
+        "CRUX.md": {
+          "checksum": "ad33ccfe61b14a01e7fe4903c07a653b4dc5861fdc4d47b6938272db4a10c00d",
+          "size": 13026
+        },
+        ".crux/crux.json": {
+          "checksum": "6d3ae2f54d9b6449614933a550b07ecbda554f133ae87c9925b53f10023999f7",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "8dc34671390ff1c358ee4aaf622f14e5b02256d2bef6da0ba92f8931bd04a84c",
+          "size": 11587
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "75e54a207d050bf05e18de7de2fc4994395829c8ee7ac1492606e000e509e9ed",
+          "size": 13511
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "40ce9142f0805f61ac7a18f38f6ea45df84c722aa8569427604906573452cce7",
+          "size": 3307
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "68c01d0932f266a5d14909f6132355fba51846f3501e8489ff782f1ce01ff9d7",
+          "size": 2777
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "11374486021a06a5f5e15927d5534b625fe60c329201a7e96d2e2948af00d6cf",
+          "size": 6746
+        }
+      }
+    },
+    "2.5.0": {
+      "date": "2026-02-08",
+      "commit": "683d4fb4630e60ae3c167146e4e6910dc1baf3e5",
+      "files": {
+        "CRUX.md": {
+          "checksum": "be283c4210414141204f6c4560924466564b623ce921d601bc2bad18a4fc3b82",
+          "size": 25675
+        },
+        ".crux/crux.json": {
+          "checksum": "c1e54b2f6de79c398972170141e9cab3283892168f7a53a5d4b558d678325cf4",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "e6a51d6cf1337aecbf68c2effc3c72f81ec0c6bafe4d6c634226db15ecc319f8",
+          "size": 12087
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "6a48f34f1321803023803aee2e3da67a1a955f162e42a317ef7da9feb7482e79",
+          "size": 20001
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "e89b018aab8446066ec1647a2c57c5a3367a5f666834b50e754400221c3f3323",
+          "size": 3317
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "bce813469557f0cb16abafc5a1b3f88a79d3930a4066e7e9dfb599814f04d67c",
+          "size": 2776
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "edf45d5ac18cd6a9611e8a1e482113145078609a473bc93d93af59f059df92f3",
+          "size": 6745
+        }
+      }
+    },
+    "2.6.0": {
+      "date": "2026-02-08",
+      "commit": "996da56217fb1b34322093251441e4ec19571ee6",
+      "files": {
+        "CRUX.md": {
+          "checksum": "54ec1b9a38148b13516dec639611502a36dc9bea5098efa3b36e62186bead370",
+          "size": 25675
+        },
+        ".crux/crux.json": {
+          "checksum": "21507a5197e63a483b9f14a6457c6e1f1b2375dbc284358e386c0efa7249aa8d",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "e6a51d6cf1337aecbf68c2effc3c72f81ec0c6bafe4d6c634226db15ecc319f8",
+          "size": 12087
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "6a48f34f1321803023803aee2e3da67a1a955f162e42a317ef7da9feb7482e79",
+          "size": 20001
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "e89b018aab8446066ec1647a2c57c5a3367a5f666834b50e754400221c3f3323",
+          "size": 3317
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "bce813469557f0cb16abafc5a1b3f88a79d3930a4066e7e9dfb599814f04d67c",
+          "size": 2776
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "edf45d5ac18cd6a9611e8a1e482113145078609a473bc93d93af59f059df92f3",
+          "size": 6745
+        }
+      }
+    },
+    "2.7.0": {
+      "date": "2026-03-11",
+      "commit": "a7f5ee292065fe489eb481a94366ff4a97752469",
+      "files": {
+        "CRUX.md": {
+          "checksum": "0470201b81429f1c51ebcbb0ba2913c09a3b4f97cb1031e4264f6d0c2376c0d0",
+          "size": 28188
+        },
+        ".crux/crux.json": {
+          "checksum": "905e8eceda73ae2e41d1e1ab6e814e4573cbad82dc00115f71a7c54968efc595",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "5d5a45d002859f4e7450f84eaa1460196d62da9fe3d013c48dbc899675fcb773",
+          "size": 16431
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "803a592fcc62bb1b6026a19aca7ab0f24da97462ef5a8d5eac6f085147b3bd8d",
+          "size": 26392
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "2308cee60bd021011b6955fa7f9b7f9798e91d1c3a6b139612af90d08314388d",
+          "size": 3463
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "bce813469557f0cb16abafc5a1b3f88a79d3930a4066e7e9dfb599814f04d67c",
+          "size": 2776
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "edf45d5ac18cd6a9611e8a1e482113145078609a473bc93d93af59f059df92f3",
+          "size": 6745
+        }
+      }
+    },
+    "2.7.1": {
+      "date": "2026-03-11",
+      "commit": "2c2f5552ce8b7a862ca9a2fb3483a5cb6e8371f1",
+      "files": {
+        "CRUX.md": {
+          "checksum": "0a11df383474c4c605fc1c193c49f6e6276248b025aad0ac01ded7a707d8c070",
+          "size": 28188
+        },
+        ".crux/crux.json": {
+          "checksum": "77d4b7088209bc8fdb7f375fe4b6e8d9b98a32e9c0d79d1cc92f498c9cffe010",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "5d5a45d002859f4e7450f84eaa1460196d62da9fe3d013c48dbc899675fcb773",
+          "size": 16431
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "803a592fcc62bb1b6026a19aca7ab0f24da97462ef5a8d5eac6f085147b3bd8d",
+          "size": 26392
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "2308cee60bd021011b6955fa7f9b7f9798e91d1c3a6b139612af90d08314388d",
+          "size": 3463
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/CRUX-Utils/SKILL.md": {
+          "checksum": "bce813469557f0cb16abafc5a1b3f88a79d3930a4066e7e9dfb599814f04d67c",
+          "size": 2776
+        },
+        ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": {
+          "checksum": "edf45d5ac18cd6a9611e8a1e482113145078609a473bc93d93af59f059df92f3",
+          "size": 6745
+        }
+      }
+    },
+    "2.8.1": {
+      "date": "2026-03-25",
+      "commit": "c588c7954519adb01b70304727e8c4b3aa0cbfe1",
+      "files": {
+        "CRUX.md": {
+          "checksum": "0ab816e68bba2d50e64ea6b350d6dab96c914b020a2e16c013e6d49c4766e9a0",
+          "size": 28188
+        },
+        ".crux/crux.json": {
+          "checksum": "e9fa2290ef1e9ca822cee4d528d69cf827159efe31d663bb074feb609cddfad7",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "1ced1de15914c3b4d065677acd8bb166b7a151e2f813486f036f6b2fb317df1f",
+          "size": 1629
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2476b235580bc3f2cc981c47b5be9618ec6c8291e5315403492217e9880fcccc",
+          "size": 18278
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "d022b9e9012fc8429b8cc43ce450de2bf04aa30158e74fdb689a5c0e971dd74d",
+          "size": 31181
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "2308cee60bd021011b6955fa7f9b7f9798e91d1c3a6b139612af90d08314388d",
+          "size": 3463
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "0834acfb0e336dcc29837fc8dc56369efc6434c20afac57f73f3e0a06b6020ab",
+          "size": 738
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "249914a42f1b7cc76fcb696d6b782d059ad818cf749afdc9f440e0044e8fd59c",
+          "size": 2776
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.sh": {
+          "checksum": "edf45d5ac18cd6a9611e8a1e482113145078609a473bc93d93af59f059df92f3",
+          "size": 6745
+        }
+      }
+    },
+    "2.8.3": {
+      "date": "2026-03-25",
+      "commit": "dc1f886e47c17ab2ec27b9ffbb3709c989169a67",
+      "files": {
+        "CRUX.md": {
+          "checksum": "197b4c3d699d4742c0a2b68c8e32aa25220f29f9a81c9f9383d4a59cae10b44e",
+          "size": 28188
+        },
+        ".crux/crux.json": {
+          "checksum": "6cb4cbd47ab2dd3a1d670ce326ad710a9c46a9bd700278d99a84bcba8234b5d3",
+          "size": 25
+        },
+        "AGENTS.md": {
+          "checksum": "70a15431ab4beebdbf13f0b6ffe564016d8a4797933d3a7db970f1e57ea8eb19",
+          "size": 2414
+        },
+        ".cursor/hooks.json": {
+          "checksum": "af2e4dc50cfeca1f323843acfb4cb036ef0f1b8f624e46042aba9adf628fb9bd",
+          "size": 586
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2476b235580bc3f2cc981c47b5be9618ec6c8291e5315403492217e9880fcccc",
+          "size": 18278
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "d022b9e9012fc8429b8cc43ce450de2bf04aa30158e74fdb689a5c0e971dd74d",
+          "size": 31181
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "2308cee60bd021011b6955fa7f9b7f9798e91d1c3a6b139612af90d08314388d",
+          "size": 3463
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "f673592017063a621410ad6e78fc293211a0c468cb098b07b27a602b66c54925",
+          "size": 1736
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "249914a42f1b7cc76fcb696d6b782d059ad818cf749afdc9f440e0044e8fd59c",
+          "size": 2776
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.sh": {
+          "checksum": "edf45d5ac18cd6a9611e8a1e482113145078609a473bc93d93af59f059df92f3",
+          "size": 6745
+        }
+      }
+    },
+    "2.8.5": {
+      "date": "2026-04-09",
+      "commit": "4e47076ffadac590720b04b96054586ea44e83fc",
+      "files": {
+        "CRUX.md": {
+          "checksum": "a6d4879556c53464b8c97c59c7f3c1529f9f50b385cdbe6196791aa36f5e3e28",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "cd88db439a0f8bc7c5ad0095b475b28b3f811e60179b4954848ae5482d22791d",
+          "size": 9471
+        },
+        ".crux/crux.json": {
+          "checksum": "e1b021da71940bfc89fdfa387f1c8e2443fade908353d8fdabce633d724fbaaa",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "8d1722859aaf8c171e47a7f69e0cafa4575dcbd15113724eaa1636b51c1d6161",
+          "size": 777
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2f94bfed0cd422464214c24240f528ebe94274dac824b9250180423a74db2512",
+          "size": 20539
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "6cf78cad4e31e9aebd3b4e7ed8faea7ad7bc9589a25a73c14c5fbfc1ec593603",
+          "size": 13197
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "ca92a102a46bb79417bc6d40696e87f9c05b04b3c81ed2ea3bfa8dbf4d28b710",
+          "size": 3178
+        },
+        ".cursor/commands/crux-mindreader.md": {
+          "checksum": "10fef5b016491fdb5716fa2f6563201b54bc2f20dd7e956dfa9532c54a7b46ff",
+          "size": 4775
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "727ec3abf63e5b04233a7cd8a454e77a4550d7c09a2fd4d35280772874e6ad97",
+          "size": 2943
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "7a4743558c3e6c3b5d446ab32ead97b2fd2c8a924635b3a463e1e127174004ed",
+          "size": 626
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "daf55581072d6bd7f8cad8724fadc1adc94e00e41a740523c6e4bb66e88d3bbb",
+          "size": 10164
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "504bc5deba1f11eb8aa374256f1095282e54bb87c190042d91389cd0adf926cc",
+          "size": 20790
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "0bb044962cc1e6c9225bab01a5b510c71c2fe8261fcd1ef5c8fa69bae2b4dcd7",
+          "size": 31218
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "1798c362f72e4310804e2dec7e6e14f7b5460b0b22d9c5cbe9afa4ad303c89d5",
+          "size": 3001
+        }
+      }
+    },
+    "2.8.6": {
+      "date": "2026-04-07",
+      "commit": "57d9a781214764b0e34249f9f0fc1b3c060d82ac",
+      "files": {
+        "CRUX.md": {
+          "checksum": "38a1da018454a677bb364431dfd30129af663affa0984583f5713788b0fdcc7b",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "719c3eb0b4665914343b99398b263294f0fb287567aa79655b363a73318c7666",
+          "size": 8607
+        },
+        ".crux/crux.json": {
+          "checksum": "8786aedd5f095470118973fb7e5afccd39c84f11663f70f2c04a5030488e152a",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "8d1722859aaf8c171e47a7f69e0cafa4575dcbd15113724eaa1636b51c1d6161",
+          "size": 777
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2f94bfed0cd422464214c24240f528ebe94274dac824b9250180423a74db2512",
+          "size": 20539
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "6cf78cad4e31e9aebd3b4e7ed8faea7ad7bc9589a25a73c14c5fbfc1ec593603",
+          "size": 13197
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "ca92a102a46bb79417bc6d40696e87f9c05b04b3c81ed2ea3bfa8dbf4d28b710",
+          "size": 3178
+        },
+        ".cursor/commands/crux-mindreader.md": {
+          "checksum": "10fef5b016491fdb5716fa2f6563201b54bc2f20dd7e956dfa9532c54a7b46ff",
+          "size": 4775
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "727ec3abf63e5b04233a7cd8a454e77a4550d7c09a2fd4d35280772874e6ad97",
+          "size": 2943
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "647ec745004c4e8ed14f284cc2b7ec80eea296725aa8817331026bf4477ad2d4",
+          "size": 1210
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "daf55581072d6bd7f8cad8724fadc1adc94e00e41a740523c6e4bb66e88d3bbb",
+          "size": 10164
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "504bc5deba1f11eb8aa374256f1095282e54bb87c190042d91389cd0adf926cc",
+          "size": 20790
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "0bb044962cc1e6c9225bab01a5b510c71c2fe8261fcd1ef5c8fa69bae2b4dcd7",
+          "size": 31218
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "1798c362f72e4310804e2dec7e6e14f7b5460b0b22d9c5cbe9afa4ad303c89d5",
+          "size": 3001
+        }
+      }
+    },
+    "2.9.0": {
+      "date": "2026-04-25",
+      "commit": null,
+      "files": {
+        "CRUX.md": {
+          "checksum": "38a1da018454a677bb364431dfd30129af663affa0984583f5713788b0fdcc7b",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "0434774028a84c9248fdd439a59ef857e8e0ec4f2c5ab4038dc84bffa40e5572",
+          "size": 8637
+        },
+        ".crux/crux.json": {
+          "checksum": "79c1b054ee53c8d4f8baf68cc792ff006be957271a2c6763fa7d094ef2e9aa99",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "8d1722859aaf8c171e47a7f69e0cafa4575dcbd15113724eaa1636b51c1d6161",
+          "size": 777
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2f94bfed0cd422464214c24240f528ebe94274dac824b9250180423a74db2512",
+          "size": 20539
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "6cf78cad4e31e9aebd3b4e7ed8faea7ad7bc9589a25a73c14c5fbfc1ec593603",
+          "size": 13197
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "ca92a102a46bb79417bc6d40696e87f9c05b04b3c81ed2ea3bfa8dbf4d28b710",
+          "size": 3178
+        },
+        ".cursor/commands/crux-mindreader.md": {
+          "checksum": "10fef5b016491fdb5716fa2f6563201b54bc2f20dd7e956dfa9532c54a7b46ff",
+          "size": 4775
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "727ec3abf63e5b04233a7cd8a454e77a4550d7c09a2fd4d35280772874e6ad97",
+          "size": 2943
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "03f43c77c343e31557a41ca28243375376b3f7316e28f635bb5094a986f61bb4",
+          "size": 1255
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "daf55581072d6bd7f8cad8724fadc1adc94e00e41a740523c6e4bb66e88d3bbb",
+          "size": 10164
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "504bc5deba1f11eb8aa374256f1095282e54bb87c190042d91389cd0adf926cc",
+          "size": 20790
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "0bb044962cc1e6c9225bab01a5b510c71c2fe8261fcd1ef5c8fa69bae2b4dcd7",
+          "size": 31218
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "1798c362f72e4310804e2dec7e6e14f7b5460b0b22d9c5cbe9afa4ad303c89d5",
+          "size": 3001
+        }
+      }
+    },
+    "2.9.1": {
+      "date": "2026-04-26",
+      "commit": "f1f25c873bc31d838a4e64de670ab2329cca33eb",
+      "files": {
+        "CRUX.md": {
+          "checksum": "25160f6006974da5484ace7b55a96d17f242ed19403b88f18b0f2cde87a30d28",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "c608d91259bfb5d6d77b1601da2110c4d96575e5bc6c2789cc3020d500898248",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "8d1722859aaf8c171e47a7f69e0cafa4575dcbd15113724eaa1636b51c1d6161",
+          "size": 777
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2f94bfed0cd422464214c24240f528ebe94274dac824b9250180423a74db2512",
+          "size": 20539
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "7b7b8c9309a8579411278bd706669c1623aad09ae9593253874589bb09545080",
+          "size": 22005
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "3bd542370ebed42d2f7ae2ce96de5a1f6fdd4354f63628312ae8b1064d8af2ec",
+          "size": 3356
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "00c9988a9afb6152590df25dd5778460c5c3b6599ee7e42f24a35b9be23a2292",
+          "size": 3072
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "91fc1b934d7ec88b2ac686650d08edcaf59f9c7215790cc5023a98711186fe0e",
+          "size": 4063
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "4f707e6ce00abef880286082962889f2e3e729720720b576343249e7be20bdfb",
+          "size": 6137
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "8a0f48ffce2f81e4b5d0d9cc7fb1033d6d3c612562cf42e965907f25df3cc85a",
+          "size": 2662
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "8f58b9512214b95b63ef3e5fa1d041bbf4c020a42821b107d27953c80c892706",
+          "size": 1270
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "7dd196110de6a7f7e3cb27fa78ac314bb8d5ebd28e5b178ed48af0837aa5ff6b",
+          "size": 10160
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "504bc5deba1f11eb8aa374256f1095282e54bb87c190042d91389cd0adf926cc",
+          "size": 20790
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "4f825152ebb6455e183f77d6083275e2aacf15ad8ef3c703e1a4ea2357d9e8dc",
+          "size": 31214
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "2a5be11cef93feea8437fc43ba4c4543583251fe9ab9d80cbcbfd13efacfc6e9",
+          "size": 4524
+        }
+      }
+    },
+    "2.9.2": {
+      "date": "2026-04-26",
+      "commit": "40ff57ac2560b91dfbb32c3cbf740e6be6c65fa0",
+      "files": {
+        "CRUX.md": {
+          "checksum": "e13c819260fcef8b92d0d289f600eaf84aadd8158f7ea20360af28d557a43651",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "b640b7516880909cf981eb403191d9d52317c7fbc4ae8d71987d6f301c452e16",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "8d1722859aaf8c171e47a7f69e0cafa4575dcbd15113724eaa1636b51c1d6161",
+          "size": 777
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2f94bfed0cd422464214c24240f528ebe94274dac824b9250180423a74db2512",
+          "size": 20539
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "7b7b8c9309a8579411278bd706669c1623aad09ae9593253874589bb09545080",
+          "size": 22005
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "3bd542370ebed42d2f7ae2ce96de5a1f6fdd4354f63628312ae8b1064d8af2ec",
+          "size": 3356
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "00c9988a9afb6152590df25dd5778460c5c3b6599ee7e42f24a35b9be23a2292",
+          "size": 3072
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "91fc1b934d7ec88b2ac686650d08edcaf59f9c7215790cc5023a98711186fe0e",
+          "size": 4063
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "4f707e6ce00abef880286082962889f2e3e729720720b576343249e7be20bdfb",
+          "size": 6137
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "8a0f48ffce2f81e4b5d0d9cc7fb1033d6d3c612562cf42e965907f25df3cc85a",
+          "size": 2662
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "8f58b9512214b95b63ef3e5fa1d041bbf4c020a42821b107d27953c80c892706",
+          "size": 1270
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "7dd196110de6a7f7e3cb27fa78ac314bb8d5ebd28e5b178ed48af0837aa5ff6b",
+          "size": 10160
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "504bc5deba1f11eb8aa374256f1095282e54bb87c190042d91389cd0adf926cc",
+          "size": 20790
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "4f825152ebb6455e183f77d6083275e2aacf15ad8ef3c703e1a4ea2357d9e8dc",
+          "size": 31214
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "2a5be11cef93feea8437fc43ba4c4543583251fe9ab9d80cbcbfd13efacfc6e9",
+          "size": 4524
+        }
+      }
+    },
+    "2.9.4": {
+      "date": "2026-05-03",
+      "commit": "e94231be0c6d7e5ae1751a58e9f0df00f45e7f0c",
+      "files": {
+        "CRUX.md": {
+          "checksum": "9299dc4f8a158946671a2b3a80a47456861ded4b75103314f70efffd0254f32d",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "d7e9bf778b74c689118493c57f0b99d13ba3893093f8437f7c8101d700d80bbd",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "add715ccb7e809284c12374b847bf27af569a056adaddb33c13d9a75f3dbf62e",
+          "size": 1008
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "2f94bfed0cd422464214c24240f528ebe94274dac824b9250180423a74db2512",
+          "size": 20539
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "cfba6ebf7530cf74295c12a03fbb4ea9a13b1a399fa9bf7ca535f673a9481a9b",
+          "size": 25270
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "a944c9d4f9e4a829c7dc3945f7b4faf0d89f9d82ddc876517b7359858394f4ba",
+          "size": 4622
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "00c9988a9afb6152590df25dd5778460c5c3b6599ee7e42f24a35b9be23a2292",
+          "size": 3072
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "4332dacd1c71baddc48113a4550a5a1cd785f40ddd366b0e27edea4c33c50122",
+          "size": 4795
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "60ed22d3bbf0b42f311efea8eaef0dc1dffc8711ed0133a4f10ee3985aaa0ea3",
+          "size": 6316
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "8a0f48ffce2f81e4b5d0d9cc7fb1033d6d3c612562cf42e965907f25df3cc85a",
+          "size": 2662
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "af4aff7d9739695cb1afad93869c2c1b5aab826ca4b830c4357be9c37e670c9a",
+          "size": 1330
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "7dd196110de6a7f7e3cb27fa78ac314bb8d5ebd28e5b178ed48af0837aa5ff6b",
+          "size": 10160
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "504bc5deba1f11eb8aa374256f1095282e54bb87c190042d91389cd0adf926cc",
+          "size": 20790
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "4f825152ebb6455e183f77d6083275e2aacf15ad8ef3c703e1a4ea2357d9e8dc",
+          "size": 31214
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "2a5be11cef93feea8437fc43ba4c4543583251fe9ab9d80cbcbfd13efacfc6e9",
+          "size": 4524
+        }
+      }
+    },
+    "2.10.0": {
+      "date": "2026-05-17",
+      "commit": "699945efd2864431a82383db7b7e00ce41318dd0",
+      "files": {
+        "CRUX.md": {
+          "checksum": "9299dc4f8a158946671a2b3a80a47456861ded4b75103314f70efffd0254f32d",
+          "size": 28188
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "357c50d8cb5c82aee9d2abac4fc753b768b6699dcbdea33e42665b7ea585a676",
+          "size": 25
+        },
+        ".cursor/hooks.json": {
+          "checksum": "add715ccb7e809284c12374b847bf27af569a056adaddb33c13d9a75f3dbf62e",
+          "size": 1008
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "737f8a90ad1a12f138a28844957ab75c191d2b569bb040668147a900314a064d",
+          "size": 20525
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "56ef15c7f2cc5b16521a6e6dd4a1ef8391f1ea9f90d91ed986d96dd379ce4905",
+          "size": 99538
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "5351c1498b5aff3e47d63901848242905a57a5a66db65fb809cbd857835409d0",
+          "size": 7189
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "8fc0593e045d4af11526a4bddfddddf544d9916a274c541690107d32f72f5b5d",
+          "size": 3158
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "de4eccb13ae8f4fa9fbd2b96ad49be9035384e3e30999d1ec9bae60c329b1967",
+          "size": 99570
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "e004e50d64d4419771498c427ca17ed2136af94d1665b16f3d2fb7b1a06dfa72",
+          "size": 6817
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "e3ff2579e57cd9f864922264fdc889aed2a09a2d62e545a05eab938a69e16531",
+          "size": 3084
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "af4aff7d9739695cb1afad93869c2c1b5aab826ca4b830c4357be9c37e670c9a",
+          "size": 1330
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "0494ec00a0cd1f0793b96ab16aba257035b7356628ccef2fa6da5a414d0aba6f",
+          "size": 10418
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "c0790270c73ae82cc1b944c84d5500630bb3100538071735955d3824641b2f5e",
+          "size": 21743
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "5696e0e0af2282916502496e8c9bbad966220f3a1e075af71ae362d4a1adb0bd",
+          "size": 31428
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "d5e44c9cb8a580acff30a649f202a157adb116de9d177a88b3335525b2744532",
+          "size": 6341
+        }
+      }
+    },
+    "2.10.1": {
+      "date": "2026-05-24",
+      "commit": "b4fc33b0c034866bb60b7fe7b03be9e0c7a18bbf",
+      "files": {
+        "CRUX.md": {
+          "checksum": "c0db983f3023397672d74c14956bc6747d4c6c985df30b5825fbf1dc13a44015",
+          "size": 28190
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "7c2a1ba3cb2ae0aefad66570324032c1b12a0148393c3715b9fa0d7abadb7b43",
+          "size": 26
+        },
+        ".cursor/hooks.json": {
+          "checksum": "add715ccb7e809284c12374b847bf27af569a056adaddb33c13d9a75f3dbf62e",
+          "size": 1008
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "737f8a90ad1a12f138a28844957ab75c191d2b569bb040668147a900314a064d",
+          "size": 20525
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "38c7a923744970af9d1d47c451b740711c57ed10017a20e40e2e87c27e8625b0",
+          "size": 153672
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "5351c1498b5aff3e47d63901848242905a57a5a66db65fb809cbd857835409d0",
+          "size": 7189
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "8fc0593e045d4af11526a4bddfddddf544d9916a274c541690107d32f72f5b5d",
+          "size": 3158
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "66e2e1a69d2de674f0adb250f0d8493405b6a7571f8d791784a7bc9271710881",
+          "size": 199526
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "e004e50d64d4419771498c427ca17ed2136af94d1665b16f3d2fb7b1a06dfa72",
+          "size": 6817
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "e3ff2579e57cd9f864922264fdc889aed2a09a2d62e545a05eab938a69e16531",
+          "size": 3084
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "af4aff7d9739695cb1afad93869c2c1b5aab826ca4b830c4357be9c37e670c9a",
+          "size": 1330
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "0494ec00a0cd1f0793b96ab16aba257035b7356628ccef2fa6da5a414d0aba6f",
+          "size": 10418
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "c0790270c73ae82cc1b944c84d5500630bb3100538071735955d3824641b2f5e",
+          "size": 21743
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "5696e0e0af2282916502496e8c9bbad966220f3a1e075af71ae362d4a1adb0bd",
+          "size": 31428
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "c6376e18a14702f5188835387438bd38b9b79467245adb0e4484988efc29670a",
+          "size": 7175
+        }
+      }
+    },
+    "2.10.2": {
+      "date": "2026-05-17",
+      "commit": "922c1fe2a83b938c3e84c9e27d74409a450cbe74",
+      "files": {
+        "CRUX.md": {
+          "checksum": "93e19e6000e82b6c040f359e1ee14e03fbfd68d953873a633337645d36dd4870",
+          "size": 28190
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "ac985dc6f3f954804986d74d9453eb016310a817ada4d18949130128936747ae",
+          "size": 26
+        },
+        ".cursor/hooks.json": {
+          "checksum": "add715ccb7e809284c12374b847bf27af569a056adaddb33c13d9a75f3dbf62e",
+          "size": 1008
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "737f8a90ad1a12f138a28844957ab75c191d2b569bb040668147a900314a064d",
+          "size": 20525
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "7d4d1fbc9c1f2685995a032ce8389677da9a9c0290c1a0bc0f9b4d3f9b2ff425",
+          "size": 114216
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "5351c1498b5aff3e47d63901848242905a57a5a66db65fb809cbd857835409d0",
+          "size": 7189
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "8fc0593e045d4af11526a4bddfddddf544d9916a274c541690107d32f72f5b5d",
+          "size": 3158
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "af8fe2ddcb5ab4140c662d08f0b0e39708efb642eea0d879a573bff166b8b2b3",
+          "size": 134562
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "e004e50d64d4419771498c427ca17ed2136af94d1665b16f3d2fb7b1a06dfa72",
+          "size": 6817
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "e3ff2579e57cd9f864922264fdc889aed2a09a2d62e545a05eab938a69e16531",
+          "size": 3084
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "2c2dcc4881d39c63e286bf12216523590e2ca1ada29b21d35a5621bb4e68f2c6",
+          "size": 3981
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "af4aff7d9739695cb1afad93869c2c1b5aab826ca4b830c4357be9c37e670c9a",
+          "size": 1330
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "0494ec00a0cd1f0793b96ab16aba257035b7356628ccef2fa6da5a414d0aba6f",
+          "size": 10418
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "c0790270c73ae82cc1b944c84d5500630bb3100538071735955d3824641b2f5e",
+          "size": 21743
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "5696e0e0af2282916502496e8c9bbad966220f3a1e075af71ae362d4a1adb0bd",
+          "size": 31428
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        "AGENTS.md": {
+          "checksum": "d5e44c9cb8a580acff30a649f202a157adb116de9d177a88b3335525b2744532",
+          "size": 6341
+        }
+      }
+    },
+    "2.10.3": {
+      "date": "2026-05-24",
+      "commit": "5288b6fffcf0fc30a9122cff57c3e78751ab22ed",
+      "files": {
+        "CRUX.md": {
+          "checksum": "43674f3e8ba2db0d360331f13ce091939c00f880aac94554d6059f3098878f1c",
+          "size": 28190
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "16eff062a4bcd8dd920815a54b8e96646aa27cb7f1119ca970fe384eeaf33d54",
+          "size": 26
+        },
+        ".cursor/hooks.json": {
+          "checksum": "add715ccb7e809284c12374b847bf27af569a056adaddb33c13d9a75f3dbf62e",
+          "size": 1008
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "737f8a90ad1a12f138a28844957ab75c191d2b569bb040668147a900314a064d",
+          "size": 20525
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "ecb4c4ce2b11394b4640bf60ce2ebc40214edfcef0529c49d9e8b430255ba4cf",
+          "size": 27498
+        },
+        ".cursor/agents/crux-cursor-meditation-guide.md": {
+          "checksum": "72c25e237dfa362d60d9f57b86acea6abfca2bc698cbd4726ca812f7a2b44b4c",
+          "size": 43100
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "dedb35a71a00e1658f0c4911aa8324d84a5379c9be6f9ad50fd424a2d0470248",
+          "size": 8181
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "8fc0593e045d4af11526a4bddfddddf544d9916a274c541690107d32f72f5b5d",
+          "size": 3158
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "9cffc81664aca0d332654a5b5c15ba91e5ed0488b35f60093f2d8c5ac5cc0031",
+          "size": 100207
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "e004e50d64d4419771498c427ca17ed2136af94d1665b16f3d2fb7b1a06dfa72",
+          "size": 6817
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "e3ff2579e57cd9f864922264fdc889aed2a09a2d62e545a05eab938a69e16531",
+          "size": 3084
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "b7dc2256ec0f2cc44f8d7c03fd4db0b06e7757a2062d8467f4d161131272c0d3",
+          "size": 7354
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "630c34fc94edaaf012c8e71712a80d5e85238f7a5fb3ecc49548b6b9e1f519dc",
+          "size": 1744
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "41183ff0fb3615612a6dba6c170ad7eadd8790a50ba22464a99fe5c7d34abead",
+          "size": 10354
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "1c4b5bf187b08e22ae9ab7cdef4349d8e8544dfa7cebc3a656b7d7c88541e309",
+          "size": 21697
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "063068b9ec1cc8c24f44d62c1e623a9bbba5d6b4d0f7419c4656ab77c22ad21a",
+          "size": 31334
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        ".cursor/skills/crux-skill-memory-meditation-research/SKILL.md": {
+          "checksum": "881c6679ef69ead127959bff6db03f3757f42f880c2d9bc1a2f7c96929dd2673",
+          "size": 52255
+        },
+        ".cursor/skills/crux-skill-memory-meditation-quick/SKILL.md": {
+          "checksum": "8ea61df9787a2f63f554e1c24aae2459c77b9f00855352fd6957280522388019",
+          "size": 19030
+        },
+        ".cursor/skills/crux-skill-memory-meditation-ensemble/SKILL.md": {
+          "checksum": "802efa7fd0775fc39eeb729cb59f34d94ac7204a8cd9d5c4db93c431195b9a40",
+          "size": 23718
+        },
+        ".cursor/skills/crux-skill-memory-meditation-review/SKILL.md": {
+          "checksum": "c257f69601faed4dfc01e131c7854736c45ae68e5b1951921b5687c7a929c9d2",
+          "size": 22167
+        },
+        ".cursor/skills/crux-skill-memory-meditation-report/SKILL.md": {
+          "checksum": "7e46a8d960ccbfa72533c72d862155d28a5b9b3d24a0e2825b8e1e942967a1d0",
+          "size": 33636
+        },
+        ".cursor/skills/crux-skill-memory-meditation-coordination/SKILL.md": {
+          "checksum": "14c3644d499a000354c0eeb316da1512bbe8c478af78b8a5d405eabc716586f7",
+          "size": 21384
+        },
+        "AGENTS.md": {
+          "checksum": "3dad117c41321a3f8abdc1a758bc9052361a7cf0132e70e8b2ba3dcdf7ee602b",
+          "size": 7667
+        }
+      }
+    },
+    "2.10.4": {
+      "date": "2026-05-24",
+      "commit": "7f61e65af965545a91b858c039619d32a3f677b3",
+      "files": {
+        "CRUX.md": {
+          "checksum": "c79d481cc4f591bb8462f2d582f8a02e02869d947ff485ccaf96d2a0f1d53de9",
+          "size": 28190
+        },
+        "install.crux.md": {
+          "checksum": "889fe6917227b000ed3e206e404ab19474fb7c8c6525da432224812822ba96f0",
+          "size": 9569
+        },
+        ".crux/crux.json": {
+          "checksum": "3ac2e5c39cfc9654ca32e9a851e7327d97559fc431edf392f25f5c2de9dfa8f9",
+          "size": 26
+        },
+        ".cursor/hooks.json": {
+          "checksum": "add715ccb7e809284c12374b847bf27af569a056adaddb33c13d9a75f3dbf62e",
+          "size": 1008
+        },
+        ".cursor/agents/crux-cursor-rule-manager.md": {
+          "checksum": "737f8a90ad1a12f138a28844957ab75c191d2b569bb040668147a900314a064d",
+          "size": 20525
+        },
+        ".cursor/agents/crux-cursor-memory-manager.md": {
+          "checksum": "ecb4c4ce2b11394b4640bf60ce2ebc40214edfcef0529c49d9e8b430255ba4cf",
+          "size": 27498
+        },
+        ".cursor/agents/crux-cursor-meditation-guide.md": {
+          "checksum": "72c25e237dfa362d60d9f57b86acea6abfca2bc698cbd4726ca812f7a2b44b4c",
+          "size": 43100
+        },
+        ".cursor/commands/crux-compress.md": {
+          "checksum": "82e5fa9360a461a6e5a32a4084aac330c78dd3253d91458309c60fde8a09bea0",
+          "size": 33154
+        },
+        ".cursor/commands/crux-amnesia.md": {
+          "checksum": "7dfbabc1598cdb0f1d8f6f2021dac7555faa65c80060764184542f6668ce2c86",
+          "size": 2822
+        },
+        ".cursor/commands/crux-dream.md": {
+          "checksum": "dedb35a71a00e1658f0c4911aa8324d84a5379c9be6f9ad50fd424a2d0470248",
+          "size": 8181
+        },
+        ".cursor/commands/crux-forget.md": {
+          "checksum": "8fc0593e045d4af11526a4bddfddddf544d9916a274c541690107d32f72f5b5d",
+          "size": 3158
+        },
+        ".cursor/commands/crux-meditate.md": {
+          "checksum": "9cffc81664aca0d332654a5b5c15ba91e5ed0488b35f60093f2d8c5ac5cc0031",
+          "size": 100207
+        },
+        ".cursor/commands/crux-recall.md": {
+          "checksum": "e004e50d64d4419771498c427ca17ed2136af94d1665b16f3d2fb7b1a06dfa72",
+          "size": 6817
+        },
+        ".cursor/commands/crux-remember.md": {
+          "checksum": "e3ff2579e57cd9f864922264fdc889aed2a09a2d62e545a05eab938a69e16531",
+          "size": 3084
+        },
+        ".cursor/hooks/crux-detect-changes.py": {
+          "checksum": "0a3e1d46ba20939c19a69a033a8327ea7e99062bcec0443a8f19fbc009e9ca01",
+          "size": 3112
+        },
+        ".cursor/hooks/crux-detect-memory-changes.py": {
+          "checksum": "e02843167caef091b590ba6f47d042d511f574ad3f8724fd69112e1d83036e68",
+          "size": 2957
+        },
+        ".cursor/hooks/crux-session-start.py": {
+          "checksum": "b7dc2256ec0f2cc44f8d7c03fd4db0b06e7757a2062d8467f4d161131272c0d3",
+          "size": 7354
+        },
+        ".cursor/rules/_CRUX-RULE.mdc": {
+          "checksum": "e50424945f9ef6d01b33619d9d44e3870a90ff9d6cfcbf99ec0fcb287875aa0b",
+          "size": 1687
+        },
+        ".cursor/rules/crux-memories-integration.crux.mdc": {
+          "checksum": "630c34fc94edaaf012c8e71712a80d5e85238f7a5fb3ecc49548b6b9e1f519dc",
+          "size": 1744
+        },
+        ".cursor/skills/crux-utils/SKILL.md": {
+          "checksum": "67ede363a8fcb5b70c23447788df601d2836de0185e72d9b4e0c0b84580ef8a8",
+          "size": 3209
+        },
+        ".cursor/skills/crux-utils/scripts/crux-utils.py": {
+          "checksum": "dae3b41d758a23f862c5202c3d7f2cad0edf7cc69bd16a3365391d39ad41d853",
+          "size": 7166
+        },
+        ".cursor/skills/crux-skill-memory-crud/SKILL.md": {
+          "checksum": "46f5ba203f9afefdef774d4ae92e7631914a311aa32229694f4f1e998613016b",
+          "size": 8895
+        },
+        ".cursor/skills/crux-skill-memory-compress/SKILL.md": {
+          "checksum": "41183ff0fb3615612a6dba6c170ad7eadd8790a50ba22464a99fe5c7d34abead",
+          "size": 10354
+        },
+        ".cursor/skills/crux-skill-memory-extract/SKILL.md": {
+          "checksum": "1c4b5bf187b08e22ae9ab7cdef4349d8e8544dfa7cebc3a656b7d7c88541e309",
+          "size": 21697
+        },
+        ".cursor/skills/crux-skill-memory-index/SKILL.md": {
+          "checksum": "9e7e7868fbe074d143380c4dd5d61a59b0256b8e3a1fdf2b0128ac7ccaa7143e",
+          "size": 5179
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": {
+          "checksum": "963db6c46d6e6985827b3e24725d9669f1f6daa19e29a4001aa27d4aad98f239",
+          "size": 7159
+        },
+        ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": {
+          "checksum": "8352c614592888ed26ad96388356903c12eb19f8886f57e61bf0d8c701656b4a",
+          "size": 1393
+        },
+        ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": {
+          "checksum": "063068b9ec1cc8c24f44d62c1e623a9bbba5d6b4d0f7419c4656ab77c22ad21a",
+          "size": 31334
+        },
+        ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": {
+          "checksum": "92d1beb527f196184e4e8d898b790d565026063f8df893db6c5082b8123b6d80",
+          "size": 9944
+        },
+        ".cursor/skills/crux-skill-memory-meditation-research/SKILL.md": {
+          "checksum": "881c6679ef69ead127959bff6db03f3757f42f880c2d9bc1a2f7c96929dd2673",
+          "size": 52255
+        },
+        ".cursor/skills/crux-skill-memory-meditation-quick/SKILL.md": {
+          "checksum": "8ea61df9787a2f63f554e1c24aae2459c77b9f00855352fd6957280522388019",
+          "size": 19030
+        },
+        ".cursor/skills/crux-skill-memory-meditation-ensemble/SKILL.md": {
+          "checksum": "802efa7fd0775fc39eeb729cb59f34d94ac7204a8cd9d5c4db93c431195b9a40",
+          "size": 23718
+        },
+        ".cursor/skills/crux-skill-memory-meditation-review/SKILL.md": {
+          "checksum": "c257f69601faed4dfc01e131c7854736c45ae68e5b1951921b5687c7a929c9d2",
+          "size": 22167
+        },
+        ".cursor/skills/crux-skill-memory-meditation-report/SKILL.md": {
+          "checksum": "7e46a8d960ccbfa72533c72d862155d28a5b9b3d24a0e2825b8e1e942967a1d0",
+          "size": 33636
+        },
+        ".cursor/skills/crux-skill-memory-meditation-coordination/SKILL.md": {
+          "checksum": "14c3644d499a000354c0eeb316da1512bbe8c478af78b8a5d405eabc716586f7",
+          "size": 21384
+        },
+        "AGENTS.md": {
+          "checksum": "3dad117c41321a3f8abdc1a758bc9052361a7cf0132e70e8b2ba3dcdf7ee602b",
+          "size": 7667
+        }
+      }
+    }
+  },
+  "allFiles": {
+    "CRUX.md": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".crux/crux.json": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    "AGENTS.md": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/hooks.json": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/agents/crux-cursor-rule-manager.md": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-compress.md": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/hooks/detect-crux-changes.sh": [
+      "2.2.0",
+      "2.2.1"
+    ],
+    ".cursor/rules/_CRUX-RULE.mdc": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/CRUX-Utils/SKILL.md": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1"
+    ],
+    ".cursor/skills/CRUX-Utils/scripts/crux-utils.sh": [
+      "2.2.0",
+      "2.2.1",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1"
+    ],
+    ".cursor/hooks/crux-detect-changes.py": [
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/hooks/crux-session-start.py": [
+      "2.3.0",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.0",
+      "2.4.1",
+      "2.5.0",
+      "2.6.0",
+      "2.7.0",
+      "2.7.1",
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-utils/SKILL.md": [
+      "2.8.1",
+      "2.8.3",
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-utils/scripts/crux-utils.sh": [
+      "2.8.1",
+      "2.8.3"
+    ],
+    "install.crux.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-utils/scripts/crux-utils.py": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/agents/crux-cursor-memory-manager.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-dream.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-recall.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-forget.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/rules/crux-memories-integration.crux.mdc": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-crud/SKILL.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-compress/SKILL.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-extract/SKILL.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-index/SKILL.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-index/scripts/memory-index.py": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-index/scripts/post-dream.py": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-rebalance/SKILL.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-reference-tracker/SKILL.md": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/hooks/crux-detect-memory-changes.py": [
+      "2.8.5",
+      "2.8.6",
+      "2.9.0",
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-amnesia.md": [
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-remember.md": [
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/commands/crux-meditate.md": [
+      "2.9.1",
+      "2.9.2",
+      "2.9.4",
+      "2.10.0",
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/agents/crux-cursor-meditation-guide.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-meditation-research/SKILL.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-meditation-quick/SKILL.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-meditation-ensemble/SKILL.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-meditation-review/SKILL.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-meditation-report/SKILL.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ],
+    ".cursor/skills/crux-skill-memory-meditation-coordination/SKILL.md": [
+      "2.10.2",
+      "2.10.3",
+      "2.10.4"
+    ]
+  }
+}

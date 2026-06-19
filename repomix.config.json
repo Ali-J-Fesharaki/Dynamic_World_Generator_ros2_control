@@ -1,0 +1,26 @@
+{
+  "output": {
+    "filePath": "repomix-output.xml",
+    "style": "xml",
+    "parsable": true,
+    "headerText": "This file contains the repository structure and contents for context.",
+    "instructionFilePath": "",
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "topFilesLength": 5,
+    "showLineNumbers": false,
+    "copyToClipboard": false
+  },
+  "include": [],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      ".venv/**",
+      "node_modules/**"
+    ]
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}

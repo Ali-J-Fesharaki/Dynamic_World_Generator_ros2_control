@@ -1,0 +1,29 @@
+{
+  "$schema": "https://cursor.sh/hooks-schema.json",
+  "version": 1,
+  "description": "CRUX hooks - compression queue, memory nudges, and source change detection",
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "python3 .cursor/hooks/crux-session-start.py",
+        "description": "CRUX: Display pending compressions and memory nudges at session start"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "python3 .cursor/hooks/crux-detect-changes.py",
+        "description": "CRUX: Queue modified source files (with crux: true) for CRUX compression"
+      },
+      {
+        "command": "python3 .cursor/hooks/crux-detect-memory-changes.py",
+        "description": "CRUX: Flag memory index for rebuild when memory files change"
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "python3 .cursor/hooks/crux-track-memory-references.py",
+        "description": "CRUX: Auto-track memory references from [memory:*] annotations in agent output"
+      }
+    ]
+  }
+}

@@ -1,13 +1,55 @@
-# ignore standalone code (old version)
+# Standalone and temporary code
 standalone_code/
 
-# ignore __pycache_
+# Python caching & virtual environments
 **/__pycache__/
-code/control_ws/install/**
-code/control_ws/build/**
-code/control_ws/logs/**
-code/control_ws/devel/**
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
 
-code/control_ws/log/**
-**/*.pyc
-**/*.vscode
+# ROS2 / Colcon Build and Install Outputs
+build/
+install/
+log/
+logs/
+devel/
+code/control_ws/build/
+code/control_ws/install/
+code/control_ws/log/
+code/control_ws/logs/
+code/control_ws/devel/
+
+# IDE / Editor configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System temporary files
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules/
+.npm/
+
+# AI / Agent Caches and Token-Saving Ignores
+.codegraph/
+.gemini/
+.ai-ignored/
+.crux/out/
+.crux/reference-tracking/
+.crux/pending-compression.json
+repomix-output.xml
+repomix-output.txt
+repomix-output.html
+repomix-output.xml.log
