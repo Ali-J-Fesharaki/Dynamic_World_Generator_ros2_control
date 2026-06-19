@@ -1,33 +1,39 @@
 obstacles:
-- name: box_4
+- name: box_7
   type: box
-  color: gray
+  color: pink
   enabled: true
-  x_pose: -3.0
-  y_pose: -3.5
+  x_pose: 6.9
+  y_pose: 4.7
   z_pose: 0.5
   size: [1.0, 1.0, 1.0]
+  motion: {type: elliptical, velocity: 1.0, std: 0.1, semi_major: 2.0, semi_minor: 1.0,
+    angle: -1.5707963267948966}
+- name: cylinder_9
+  type: cylinder
+  color: red
+  enabled: true
+  x_pose: 6.2
+  y_pose: -5.4
+  z_pose: 0.5
+  size: [0.5, 1.0]
+  motion: {type: elliptical, velocity: 1.0, std: 0.0, semi_major: 4.0, semi_minor: 2.0,
+    angle: -1.5707963267948966}
+- name: sphere_11
+  type: sphere
+  color: blue
+  enabled: true
+  x_pose: -11.3
+  y_pose: 5.7
+  z_pose: 0.8999999999999999
+  size: [0.8999999999999999]
   motion:
     type: polygon
     velocity: 1.0
     std: 0.1
     path:
-    - [0.20000000000000018, 0.0]
-    - [5.9, -0.7999999999999998]
-    - [5.4, 1.2000000000000002]
-    - [0.2999999999999998, 0.7999999999999998]
-- name: box_5
-  type: box
-  color: purple
-  enabled: true
-  x_pose: 4.7
-  y_pose: -2.8
-  z_pose: 0.5
-  size: [1.0, 1.0, 1.0]
-  motion:
-    type: linear
-    velocity: 1.0
-    std: 0.1
-    path:
-    - [-0.20000000000000018, -0.10000000000000009]
-    - [1.5, 5.8]
+    - [0.3000000000000007, -0.2999999999999998]
+    - [12.9, 8.399999999999999]
+    - [-3.5999999999999996, 6.8999999999999995]
+    - [-4.199999999999999, 0.39999999999999947]
+    - [-0.1999999999999993, -0.5]

@@ -502,8 +502,15 @@ class ObstaclesPanel(QWidget):
         try:
             wm.apply_changes()
             
-            cfg = os.path.join(get_package_share_directory("dynamic_obstacle_gz_spawning"),"config","obstacles.yaml")
-            self._export(cfg)
+            src_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+            install_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "dynamic_obstacle_gz_spawning", "share", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+            
+            os.makedirs(os.path.dirname(src_cfg), exist_ok=True)
+            self._export(src_cfg)
+            
+            os.makedirs(os.path.dirname(install_cfg), exist_ok=True)
+            self._export(install_cfg)
+            
             self._refresh()
             
             has_dynamic = any("motion" in m.get("properties", {}) for m in wm.models if m["type"] in ("box","cylinder","sphere") and m.get("status") != "removed")
@@ -539,8 +546,8 @@ class ObstaclesPanel(QWidget):
             obs.append(o)
         data = {"obstacles":obs}
         if path is None:
-            if wm.world_path:
-                path = os.path.join(get_package_share_directory("dynamic_obstacle_gz_spawning"),"config","obstacles.yaml")
+            if not path:
+                path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
             else: return
         try:
             os.makedirs(os.path.dirname(path), exist_ok=True)

@@ -42,55 +42,81 @@ class AppState(QObject):
             self.status("No world loaded.", "error")
             return False
             
-        import subprocess
-        import os
-        from utils.config import PROJECT_ROOT
+        import threading
         
-        # Kill existing process if running
-        if self.preview_process is not None:
-            try:
-                self.preview_process.terminate()
-                self.preview_process.wait(timeout=2)
-            except:
+        def launch_task():
+            import subprocess
+            import os
+            import psutil
+            from utils.config import PROJECT_ROOT
+            
+            # Check if Gazebo is running
+            gz_running = False
+            for proc in psutil.process_iter(['name', 'cmdline']):
                 try:
-                    self.preview_process.kill()
-                except:
+                    name = proc.info.get('name', '') or ''
+                    cmdline = proc.info.get('cmdline', []) or []
+                    if 'ruby' in name or 'gz' in name or 'ign' in name:
+                        if any('gz' in arg or 'ign' in arg for arg in cmdline):
+                            gz_running = True
+                            break
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                     pass
-            self.preview_process = None
-
-        # Forcefully kill any lingering Gazebo processes to ensure world reloads
-        subprocess.run(["pkill", "-9", "-f", "ign gazebo|gz sim"], stderr=subprocess.DEVNULL)
-        subprocess.run(["pkill", "-9", "ruby"], stderr=subprocess.DEVNULL)
-        subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
-        subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
-        subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
-
-        try:
-            if use_ros_launch:
-                setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
-                if not os.path.exists(setup):
-                    setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.bash")
-                shell = "zsh" if "zsh" in setup else "bash"
-                cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_gz_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
-                self.preview_process = subprocess.Popen([shell, "-c", cmd])
-                self.status("Launched ROS2 spawner", "success")
-            else:
-                sdf_path = os.path.join(PROJECT_ROOT, "code", "control_ws", "install",
-                                        "dynamic_obstacle_gz_spawning", "share",
-                                        "dynamic_obstacle_gz_spawning", "worlds", f"{self.world_manager.world_name}.sdf")
-                
-                if self.world_manager.version == "harmonic":
-                    cmd = ["gz", "sim", sdf_path]
+    
+            if not use_ros_launch and gz_running:
+                self.world_manager.sync_static_models_to_running_gazebo()
+                self.status("Synced static models to Gazebo", "success")
+                return True
+    
+            # Kill existing process if running
+            if self.preview_process is not None:
+                try:
+                    self.preview_process.terminate()
+                    self.preview_process.wait(timeout=2)
+                except:
+                    try:
+                        self.preview_process.kill()
+                    except:
+                        pass
+                self.preview_process = None
+    
+            # Forcefully kill any lingering Gazebo processes to ensure world reloads
+            subprocess.run(["pkill", "-9", "-f", "ign gazebo"], stderr=subprocess.DEVNULL)
+            subprocess.run(["pkill", "-9", "-f", "gz sim"], stderr=subprocess.DEVNULL)
+            subprocess.run(["pkill", "-9", "ruby"], stderr=subprocess.DEVNULL)
+            subprocess.run(["pkill", "-9", "-f", "ros2 launch"], stderr=subprocess.DEVNULL)
+            subprocess.run(["pkill", "-9", "-f", "trajectory_publisher"], stderr=subprocess.DEVNULL)
+            subprocess.run(["pkill", "-9", "-f", "robot_state_publisher"], stderr=subprocess.DEVNULL)
+            subprocess.run(["pkill", "-9", "-f", "parameter_bridge"], stderr=subprocess.DEVNULL)
+    
+            try:
+                if use_ros_launch:
+                    setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.zsh")
+                    if not os.path.exists(setup):
+                        setup = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "setup.bash")
+                    shell = "zsh" if "zsh" in setup else "bash"
+                    cmd = f"source {setup} && exec ros2 launch dynamic_obstacle_gz_spawning multi_obstacle_world.launch.py world_name:={self.world_manager.world_name}"
+                    self.preview_process = subprocess.Popen([shell, "-c", cmd])
+                    self.status("Launched ROS2 spawner", "success")
                 else:
-                    cmd = ["ign", "gazebo", sdf_path]
+                    sdf_path = os.path.join(PROJECT_ROOT, "code", "control_ws", "install",
+                                            "dynamic_obstacle_gz_spawning", "share",
+                                            "dynamic_obstacle_gz_spawning", "worlds", f"{self.world_manager.world_name}.sdf")
                     
-                self.preview_process = subprocess.Popen(cmd)
-                self.status("Launched Gazebo Preview", "success")
-                
-            return True
-        except Exception as e:
-            self.status(f"Launch failed: {str(e)}", "error")
-            return False
+                    if self.world_manager.version == "harmonic":
+                        cmd = ["gz", "sim", sdf_path]
+                    else:
+                        cmd = ["ign", "gazebo", sdf_path]
+                        
+                    self.preview_process = subprocess.Popen(cmd)
+                    self.status("Launched Gazebo Preview", "success")
+                    
+            except Exception as e:
+                self.status(f"Launch failed: {str(e)}", "error")
+
+        self.status("Initializing Launch Process...", "info")
+        threading.Thread(target=launch_task, daemon=True).start()
+        return True
 
     def cleanup(self):
         if self.world_manager:

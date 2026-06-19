@@ -131,12 +131,12 @@ class ExportPanel(QWidget):
             return
         try:
             wm.apply_changes()
-            from ament_index_python.packages import get_package_share_directory
             import yaml
             # Quick export
-            cfg = os.path.join(get_package_share_directory("dynamic_obstacle_gz_spawning"),
-                               "config", "obstacles.yaml")
-            self._do_export(cfg)
+            src_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+            install_cfg = os.path.join(PROJECT_ROOT, "code", "control_ws", "install", "dynamic_obstacle_gz_spawning", "share", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
+            self._do_export(src_cfg)
+            self._do_export(install_cfg)
             
             has_dynamic = any("motion" in m.get("properties", {}) for m in wm.models if m["type"] in ("box","cylinder","sphere") and m.get("status") != "removed")
             
@@ -153,7 +153,6 @@ class ExportPanel(QWidget):
         if not wm:
             return
         import yaml
-        from ament_index_python.packages import get_package_share_directory
         obs = []
         for m in wm.models:
             if m.get("status") == "removed" or m["type"] not in ("box", "cylinder", "sphere"):
@@ -182,8 +181,7 @@ class ExportPanel(QWidget):
                     o["motion"]["angle"] = float(mt["angle"])
             obs.append(o)
         if path is None:
-            path = os.path.join(get_package_share_directory("dynamic_obstacle_gz_spawning"),
-                                "config", "obstacles.yaml")
+            path = os.path.join(PROJECT_ROOT, "code", "control_ws", "src", "dynamic_obstacle_gz_spawning", "config", "obstacles.yaml")
         try:
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "w") as f:

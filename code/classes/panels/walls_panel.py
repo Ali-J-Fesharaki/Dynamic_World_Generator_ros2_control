@@ -125,7 +125,10 @@ class WallsPanel(QWidget):
     def eventFilter(self, obj, event):
         if not self.is_active:
             return super().eventFilter(obj, event)
-        if obj != self.view.viewport() or not self.app.world_manager:
+        try:
+            if obj != self.view.viewport() or not self.app.world_manager:
+                return super().eventFilter(obj, event)
+        except RuntimeError:
             return super().eventFilter(obj, event)
 
         if event.type() == QEvent.MouseButtonPress and event.button() == Qt.LeftButton:
@@ -165,8 +168,11 @@ class WallsPanel(QWidget):
                     "status": "new",
                 })
                 self._start_pt = None
-                if self._preview_line:
-                    self.app.scene.removeItem(self._preview_line)
+                if getattr(self, '_preview_line', None) is not None:
+                    try:
+                        self.app.scene.removeItem(self._preview_line)
+                    except RuntimeError:
+                        pass
                     self._preview_line = None
                     
                 self.view.set_crosshair_mode(False)
@@ -176,9 +182,12 @@ class WallsPanel(QWidget):
 
         elif event.type() == QEvent.MouseMove and self._start_pt is not None:
             pt = self.snap(self.view.mapToScene(event.pos()))
-            if self._preview_line:
+            if getattr(self, '_preview_line', None) is not None:
                 from PyQt5.QtCore import QLineF
-                self._preview_line.setLine(QLineF(self._start_pt, pt))
+                try:
+                    self._preview_line.setLine(QLineF(self._start_pt, pt))
+                except RuntimeError:
+                    self._preview_line = None
             return False
 
         return super().eventFilter(obj, event)
